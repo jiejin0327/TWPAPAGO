@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">            
+    </head>
+
+    <body>
+        <script>
+        var viewPoint = ['', '臺北市立動物園','北投公園', '陽明山'];
+            var viewPointImageUrl  = ['',
+               'https://photo.travelking.com.tw/scenery/6BAE69E4-3197-47E1-8FE4-7B7A39874159_e.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8.jpg/1200px-%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8.jpg', 
+                'https://image.cache.storm.mg/styles/smg-800x533-fp/s3/media/image/2017/08/22/20170822-010904_U6077_M315105_e95d.jpg?itok=3rw6SJ3f'];
+            var viewPointPhoto=['',
+               'https://www.google.com/search?q=%E5%8F%B0%E5%8C%97%E5%8B%95%E7%89%A9%E5%9C%92&rlz=1C1DLBX_zh-TWTW810TW813&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjRg_Cppo7kAhW3zIsBHTvKAtUQ_AUIEigC&biw=1280&bih=610',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=rUBaXeH2OtPemAW0qK2QBA&q=%E5%8C%97%E6%8A%95&oq=%E5%8C%97%E6%8A%95&gs_l=img.3..0l10.281378.283323..284026...0.0..0.39.230.7......0....1..gws-wiz-img.....0..0i24._i5yvhb_Q4k&ved=0ahUKEwihgbqrpo7kAhVTL6YKHTRUC0IQ4dUDCAY&uact=5',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=1_UrXcOUL7aXr7wPpvKs2As&q=%E9%99%BD%E6%98%8E%E5%B1%B1&oq=%E9%99%BD%E6%98%8E%E5%B1%B1&gs_l=img.3..0l10.92725.96034..96598...0.0..0.44.465.15......0....1..gws-wiz-img.....0..35i39j0i24.aQth_GcnA6A'];
+            var viewPointMap = ['',
+                'https://www.google.com/maps/place/%E8%87%BA%E5%8C%97%E5%B8%82%E7%AB%8B%E5%8B%95%E7%89%A9%E5%9C%92/@24.9983469,121.5810358,15z/data=!4m5!3m4!1s0x0:0xaafe06fd09b4d766!8m2!3d24.9983469!4d121.5810358', 
+                'https://www.google.com/maps/place/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8/@25.1365857,121.5049551,17z/data=!3m1!4b1!4m5!3m4!1s0x3442ae50f43af1e9:0xadf18f29697c0a3c!8m2!3d25.1365766!4d121.5071537?hl=zh-TW',
+                'https://goo.gl/maps/6geHUhSYF3kx4KWs6'];
+            var viewPointWeb=['',
+                             'https://english.zoo.gov.taipei/',
+                             'https://hotspringmuseum.taipei/News_Content.aspx?n=7F7676C34AC3FCF9&sms=CDFD835559552999&s=14090D7DD708233F',
+                             'https://www.ymsnp.gov.tw/index.php?option=com_content&view=featured&gp=0&Itemid=104'];
+            var passage1_eng=['',
+                             'On October 30th 1986 the new zoo at Mucha was officially opened , thirty times larger than the original , and at Yuanshan an era came to a close .',
+                             'But the Hot Springs Museum doesn &apos;t just chart the development of Peitou and tell the story of its springs ; its creation also sparked the idea of the " Peitou Eco-museum , " and it provides an excellent model for making new use of an historical site .'];
+            var passage2_eng=['',
+                             'According to statistics , an average of around 200,000 people visit Taipei Zoo each month . It takes only 20 minutes from the zoo to Maokong by cable car , so the city government estimates that the Maokong Gondola should bring on average about 20,000 visitors per day to Maokong .',
+                              'Long before Han Chinese arrived , Peitou had an aura of mystery about it , shadowy and wreathed in mist . For this reason the Aboriginal Ketagalan people living nearby named it " shamaness , " which in their language sounds similar to the Taiwanese pronunciation of the characters for " peitou . "'
+                             ];
+            var passage3_eng=['',
+                              'Such shocks are unknown at the current zoo in Mucha , partly because down through the years at Yuanshan , people came to understand animals a little better .',
+                              '',
+                              '" The reeds and rushes are ashy grey / The white dew has become frost " --The Book of Odes . The autumn winds give a deep sense of the season , and on Yangmingshan seas of blooming silvergrass plumes sway elegantly in the breeze . As they move , it is as if they were pulling back the curtains for the season .'
+                              ];
+            var passage1Content = [[],
+                ['規劃','因此台北市政府決定在木柵規劃一座比圓山大卅倍的動物園。七十五年十月卅一日，木柵動物園正式開幕，為圓山動物園的輝煌歷史劃上休止符。'],
+                ['博物館','北投溫泉博物館不僅紀錄著北投的發展、溫泉的故事，也帶動整個北投生態博物館觀念的形成，堪稱是古蹟再利用的最佳典範。'],
+                ['氣候','三月，又到了一個群花爭豔、氣候宜人的季節，陽明山上遊人如織，大家徜徉在青山綠草之間，沐浴在大自然的美景裡。']];
+            var passage2Content = [[],
+                ['統計','據統計，木柵動物園平均一個月有20萬人次的遊客，從動物園搭乘纜車上貓空，只要20分鐘就可到達。'],
+                ['之前','其實，早於漢人進入之前，籠罩在一片煙霧飄渺中的北投，充滿神秘感，因而被居住在附近的凱達格蘭族人稱為「女巫之地」，之後因為音似台語的「北投」而得名。'],
+                [ '火山','二十萬年前才結束火山噴發的陽明山國家公園，至今仍以大屯山的地熱、硫磺等火山遺跡傲人。']];
+            var passage3Content = [[],
+                ['動物園','這些缺失，在現在新穎、專業化的木柵動物園已不復見。多年來，人們也由圓山動物園認識了許多動物的習性。'],
+                [],
+                ['一望無際','「蒹葭蒼蒼，白露為霜」，秋風正起，秋意漸濃，一望無際的芒花在陽明山盛開起來，宛如白浪翻騰，漫漫的花海以數大為美之姿，舒展蒼茫的風韻，搖曳中為人們悄悄拉開了秋天的序幕。']];
+            var var1Content = [[],
+                ['人生的自我追尋，當然可以事先組織規劃，訂定目標、進行分析，制定步驟，為未來擬定行動分針。(6)',
+                '這次的作業，如果不知道如何著手，你可以選擇生活中最重要的項目或是目前迫切突破的目標來規劃。(3)',
+                '今天舉辦的小型討論會，藉由互相激發靈感、導正觀念，期望學生正視自己，探討生涯，學會規劃未來藍圖。(6)'],
+                ['台中的自然科學博物館，是學習自然科學的有趣殿堂。(3)',
+                '故宮博物院是中國最大的博物館，它走過的路，某種程度上是中國文物博物館事業的一個縮影。(1)',
+                '對展覽品的內容提出回饋，鼓勵博物館的展覽走向更好的易用性和易理解性。(4)'],
+                ['當濫砍伐樹林時，卻沒有考慮到這將會引起哪些後果，諸如水土保持、資源枯竭、氣候變化、景觀破壞等問題。(4)',
+                '汙染的擴大，已使得酸雨、油汙染、森林大火，形成一股汙染鏈，引起世界性的氣候異常。(4)',
+                '高山氣候變化多端，一天之中體驗陰晴不定的情況，經歷春夏秋冬不同的感覺是司空見慣的事。(2)']];
+            var var2Content = [[],
+                ['透過大量個案的歸納、統計、分析，可以比較客觀地呈現那個時期普遍存在於個人、家庭、社會的問題。(5)',
+                '各家媒體做得此項社會實驗研究不免有些誇張，因為他們必須應用這些數字統計來爭取大眾目光。(5)',
+                '根據統計，這些自己調製出來的天然保養品所導致過敏或是刺激皮膚的機會反而更高。(5)'],
+                ['一旦決定可做或不可做某些事情後，要嚴格遵守。因此說「不可」之前，最好先三思再做決定。(3)',
+                '由於觸覺刺激具有首要和長久的效果，以及對別種感覺樣式的效應，因此可在一般活動或教育措施之前，事先施給孩童這類觸覺刺激。(4)',
+                '在放手讓幼兒自由探索之前，應該先讓幼兒熟悉玩具本身的特性並遵守，以養成對物體尊重的態度。(4)'],
+                ['不要把怨恨隱藏在心中，積怨久了，會像火山爆發一樣不可收拾。(5)',
+                '硬體的優勢若無軟體配合，就像一座死火山一般，發不出光和熱。(3)',
+                '板塊間會互相推擠，保持微妙平衡，如果這個平衡部份崩解，就會發生地震或火山爆發等地殼變動。(4)']];
+            var var3Content = [[],
+                ['因此，每當動物園裡引進了新的明星動物，不管是無尾熊還是熊貓，人們總是大排長龍想要看牠們一眼。(5)',
+                '迪士尼樂園不同於一般的公園或動物園，它在某個意義上禁止發自個人的即興遊戲或脫序。(4)',
+                '不要靠近有幼獅的母獅子，也不要靠近剛生了寶寶的母熊或是羚羊，因為牠們為了積極保護下一代，會有攻擊性，甚至連命都不要。(5)'],
+                [],
+                ['飛機的下方是灰暗色的厚厚卷雲，一望無際，像無邊無盡的平原。(4)',
+                '列車衝出茂密的闊葉林，行駛在一望無際的原野上。(6)',
+                '火車接近的港時，到了海岸邊，一望無際的海洋，點點船隻漂遊其上，從車窗望出去滿心清爽。(5)']];
+var viewPointImageUrl_new  = ['',
+'https://photo.travelking.com.tw/scenery/6BAE69E4-3197-47E1-8FE4-7B7A39874159_e.jpg',
+'http://pic.pimg.tw/bwpingu/49a80a39239ed.jpg',
+'http://4.bp.blogspot.com/-uo1INWjO-nE/VkiV0RoiYFI/AAAAAAAABDc/zUJOd6xJiRQ/s1600/Zhinan%2BTemple%2B%25E6%258C%2587%25E5%258D%2597%25E5%25AE%25AE.jpg',
+'https://images.chinatimes.com/newsphoto/2019-08-04/900/20190804002527.jpg',
+'https://imgs.weekendhk.com/wp-content/uploads/2014/10/126.jpg',
+'https://blog.kkday.com/wp-content/uploads/Taiwan_Taipei_Taipei-101_AShutterstock_28310509.jpg',
+'https://storage.googleapis.com/smiletaiwan-cms-cwg-tw/article/201805/article-5afd3c77edcdf.jpg',
+'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8.jpg/1200px-%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8.jpg',
+'https://upload.wikimedia.org/wikipedia/commons/9/9f/Taipei_Daan_Park_-_Ecological_Pool_-_20180805_-_02.jpg',
+'https://live.staticflickr.com/5657/23599120275_58dd95a55d_b.jpg',
+'https://www.travel.taipei/image/63532/1024x768',
+'https://www.travel.taipei/image/63477/1024x768',
+'https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_2187_5.jpg',
+'https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_R177_10.jpg',
+'https://www.travel.taipei/image/64376/1024x768',
+'https://upload.wikimedia.org/wikipedia/commons/4/4c/%E8%A1%8C%E4%BF%AE%E5%AE%AE%EF%BC%88%E8%A1%8C%E5%A4%A9%E5%AE%AE%E4%B8%89%E5%B3%BD%E5%88%86%E5%AE%AE%EF%BC%89.jpg',
+'https://img.snowhy.tw/20190119175343_9.jpg',
+'http://www.gh3c.com.tw/data/files/mall/article/201409241656537979.jpg',
+'http://mmmfile.emmm.tw/L3/84284/image/LR4A9928.jpg',
+'https://s.yimg.com/ny/api/res/1.2/.Ktv1sVsglUJy6LOUYEceQ--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAwO2lsPXBsYW5l/http://media.zenfs.com/zh-Hant-TW/News/peoplenews.tw/44263848-4617-4acb-b905-2a073921adf5.jpg',
+'https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_152_3.jpg',
+'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Longshan_Temple%2C_Taipei_01.jpg/1280px-Longshan_Temple%2C_Taipei_01.jpg',
+'https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_2889_12.jpg',
+'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/%E5%89%9D%E7%9A%AE%E5%AF%AE%E6%AD%B7%E5%8F%B2%E5%BB%BA%E7%AF%89%E7%BE%A4.jpg/1280px-%E5%89%9D%E7%9A%AE%E5%AF%AE%E6%AD%B7%E5%8F%B2%E5%BB%BA%E7%AF%89%E7%BE%A4.jpg',
+'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/%E8%A5%BF%E9%96%80%E7%B4%85%E6%A8%93-2.JPG/1280px-%E8%A5%BF%E9%96%80%E7%B4%85%E6%A8%93-2.JPG',
+'https://www.travel.taipei/image/90498/1024x768',
+'https://upload.wikimedia.org/wikipedia/commons/9/9f/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8.jpg',
+'https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_290_8.jpg',
+'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Juming_Museum_11.jpg/1280px-Juming_Museum_11.jpg',
+'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ShiFengWaterFall_002.jpg/1280px-ShiFengWaterFall_002.jpg'];
+        </script>
+    </body>
+</html>

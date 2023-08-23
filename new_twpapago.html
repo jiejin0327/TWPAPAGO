@@ -1,0 +1,394 @@
+<!-- saved from url=(0084)file:///C:/Users/user/Desktop/%E5%8F%B0%E7%81%A3PAPAGO/%E5%8F%B0%E7%81%A3PAPAGO.html -->
+<html ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>台灣PaPaGO</title>
+    <meta name="description" content="An interactive getting started guide for Brackets.">
+    <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/demo.css" />
+    <link type="text/css" rel="stylesheet" href="css/mmenu.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+
+    <!-- IE 10 and 11 polyfills -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Array.prototype.filter%2CArray.prototype.forEach%2CArray.prototype.map%2CElement.prototype.cloneNode%2Cdocument.querySelector"></script>
+
+    <link href=”path/jquery.mmenu.all.css” rel=”stylesheet” />
+    <script src=”path/jquery.js”></script>
+    <script src=”path/jquery.mmenu.all.js”></script>
+    <script> jQuery(document).ready(function( $ ) { $("#menu").mmenu(); }); </script>
+
+<style>
+/*       生詞的背景顏色*/
+    .var     {
+            width: 50%;
+            height: 50%;
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            margin: -200px 0 0 -30%;
+            display: table;
+            background : pink;
+            padding:20px 30px; 
+            z-index: 100;
+            box-shadow: 1px 2px 4px;
+            opacity: .95;
+            display: none;
+            overflow-x: hidden;
+            overflow-y:auto;
+            cursor: pointer;
+            }
+    
+/*       往上箭頭*/
+    #gotop {
+            position:fixed;
+            z-index:90;
+            right:30px;
+            bottom:31px;
+            display:none;
+            width:50px;
+            height:50px;
+            color:#fff;
+            background:#33b5e5;
+            line-height:50px;
+            border-radius:50%;
+            transition:all 0.5s;
+            text-align: center;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+            }
+    
+    a:link { 
+            color:#FF0000; 
+            text-decoration:underline; 
+            }
+    a:visited {color: #FF0000}
+    a:active {color: #FF0000}
+    a:hover {color: #FF0000}
+</style>
+
+
+</head>
+<body>
+    
+    <div id="page">
+    <div class="header" id=color>
+            <a href="#menu"><span></span></a>
+        <p id="viewTraffic"></p>
+    </div>
+    
+        <h1 id="viewPoint" align="center">陽明山</h1>
+    <div id=color style=padding:5px;margin-bottom:5px;> </div>
+    <div style="text-align:center;">
+        <img width="100%" id="viewPointImage" alt="photo is deleted" src="image/icon3.png">
+        <br>
+        
+    <!--超連結-->
+        <div style="text-align: center">
+        <div id="viewPhoto" style="display: inline-block;">
+            <a href="#" ;align="center"target="_blank"><img height="75px" src="image/icon.png"></a>
+        </div>
+        <div id="viewMap" style="display: inline-block;">
+            <a href="https://www.google.com/maps/place/%E9%99%BD%E6%98%8E%E5%B1%B1%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92/@25.1942462,121.5587476,17z/data=!3m1!4b1!4m5!3m4!1s0x3442adf824cfc74b:0x5c0be3a34fc3b079!8m2!3d25.1942462!4d121.5609363?hl=zh-TW" target="_blank"><img height="75px" src="image/icon2.png"></a>
+        </div>
+        <div id="viewWeb" style="display: inline-block;">    
+            <a href="https://www.ymsnp.gov.tw/index.php?option=com_content&amp;view=featured&amp;gp=0&amp;Itemid=104" target="_blank"><img height="75px" src="image/icon3.png"></a>
+        </div>
+        </div>
+    </div>
+
+    <h2 align="center">華語短文</h2>
+    
+    <!--短文-->
+    <div id="passagesContainer">
+        <!-- Passages will be inserted dynamically here -->
+    </div>
+
+    <!-- GoTop -->
+    <a href="#viewPoint" id="gotop">
+        <i class="fa fa-angle-up"></i>
+        <p style="margin-top: -15">Top</p>
+    </a>
+    
+
+         <!-- mmenu HTML -->
+         <nav id="menu">
+            <ul>
+                <li><a href="index.html">首頁</a></li>
+                <li><span>臺北捷運MRT</span>
+                    <ul id="MRT">
+                        <li><span>文湖線BR</span>
+                            <ul>
+                                <li><a href="new_twpapago.html?view=1">臺北市立動物園 Taipei Zoo</a></li>
+                                 <li><a href="new_twpapago.html?view=2">貓空纜車 Maokong Gondola</a></li>
+                                 <li><a href="new_twpapago.html?view=3">指南宮 Zhinan Temple</a></li>
+                                 <li><a href="new_twpapago.html?view=4">松山機場 The Taipei Songshan airport</a></li>
+                                 <li><a href="new_twpapago.html?view=5">大湖公園 Dahu Park</a></li>
+                            </ul>
+                        </li>
+                        <li><span style="background-color:#e3002c;">淡水信義線R</span>
+                            <ul>
+                                <li><a href="new_twpapago.html?view=6">臺北101 Taipei 101</a></li>
+                                <li><a href="new_twpapago.html?view=7">陽明山 Yangmingshan National Park</a></li>
+                                <li><a href="new_twpapago.html?view=8">北投 Beitou District</a></li>
+                                <li><a href="new_twpapago.html?view=9">大安森林公園 Daan Park</a></li>
+                                <li><a href="new_twpapago.html?view=10">永康 Yongkang Street  Area</a></li>
+                            </ul>
+                        </li>
+                        <li><span style="background-color:#e3002c;">松山新店線G</span>
+                            <ul>
+                                <li><a href="new_twpapago.html?view=11">中正紀念堂 National Chiang Kai-shek Memorial Hall</a></li>
+                                <li><a href="new_twpapago.html?view=12">歷史博物館 National Museum of History</a></li>
+                                <li><a href="new_twpapago.html?view=13">碧潭 Bitan Scenic Area</a></li>
+                                <li><a href="new_twpapago.html?view=14">饒河街夜巿 Raohe Street Tourist Night Market</a></li>
+                                <li><a href="new_twpapago.html?view=15">仙跡岩 Xianjiyan</a></li>
+                            </ul>
+                        </li>
+                        <li><span>中和新蘆線O</span>
+                            <ul>
+                                <li><a href="new_twpapago.html?view=16">行天宮 Xingtian Temple</a></li>
+                                <li><a href="new_twpapago.html?view=17">迪化街 Dihua Street</a></li>
+                                <li><a href="new_twpapago.html?view=18">光華商場 Guanghua Market</a></li>
+                                <li><a href="new_twpapago.html?view=19">華山1914文化創意產業園區 Huashan 1914 Creative Park</a></li>
+                                <li><a href="new_twpapago.html?view=20">蘆洲李宅 Li Family Abode</a></li>
+                            </ul>
+                        </li>
+                        <li><span>板南線BL</span>
+                            <ul>
+                                <li><a href="new_twpapago.html?view=21">板橋林家花園 The Lin Family Mansion and Garden</a></li>
+                                <li><a href="new_twpapago.html?view=22">龍山寺 Lungshan Temple</a></li>
+                                <li><a href="new_twpapago.html?view=23">國父紀念館 National Dr.Sun Yat-sen Memorial Hall</a></li>
+                                <li><a href="new_twpapago.html?view=24">剝皮寮 Bopiliao Historic Block</a></li>
+                                <li><a href="new_twpapago.html?view=25">西門紅樓 The Red House</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><span>臺灣好行BUS</span>
+                    <ul>
+                        <li><a href="new_twpapago.html?view=26">陽明書屋 Yangmingshuwu</a></li>
+                        <li><a href="new_twpapago.html?view=27">深坑老街 Shenkeng Old Street</a></li>
+                        <li><a href="new_twpapago.html?view=28">九份 Jiufen</a></li>
+                        <li><a href="new_twpapago.html?view=29">朱銘美術館 Juming Museum</a></li>
+                        <li> <a href="new_twpapago.html?view=30">十分瀑布 Shifen Scenic Area</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html"target=_blank>關於</a></li>
+            </ul>
+        </nav>
+    
+
+<script>     
+    const VIEW_THRESHOLD = 5;
+
+    $.urlParam = function (name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+                          .exec(window.location.search);
+        return (results !== null) ? results[1] || 0 : false;
+    }
+    $(document).ready(function(){
+        
+        $('#gotop').click(function(){
+            $('html,body').animate({ scrollTop: 0 }, 'slow');   /* 返回到最頂上 */
+            return false;
+        });
+
+        /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
+        $(window).scroll(function() {
+            if ( $(this).scrollTop() > 100){
+                $('#gotop').fadeIn();
+            } else {
+                $('#gotop').fadeOut();
+            }
+        });
+        var view = $.urlParam('view');
+
+        var styleSettings = [
+                { color: "#c48c31", text: "文湖線BR" },
+                { color: "#e3002c", text: "淡水信義線R" },
+                { color: "#008659", text: "松山新店線G" },
+                { color: "#f8b61c", text: "中和新蘆線O" },
+                { color: "#0070bd", text: "板南線BL" },
+                { color: "#adadad", text: "臺灣好行" },
+            ];
+
+        function setStyle(view) {
+
+            const index = Math.floor((view-1) / VIEW_THRESHOLD);
+            if (index >= 0 && index < styleSettings.length) {
+                const d = document.getElementById("color");
+                d.style.backgroundColor = styleSettings[index].color;
+                const dText = document.getElementById("viewTraffic");
+                dText.textContent = styleSettings[index].text;
+            }
+        }
+        
+        if (view !== false) {
+            setStyle(view)
+
+        // Function to create passage HTML
+        const createPassageHTML = (passageData, idx, contents) => {
+            
+            var passageContent = contents[1];
+
+            if (passageContent) {
+                var varContent = contents[0];
+                var tempContent = `<a href=#passage${idx + 1}; onclick=showVar('var${idx + 1}') onMouseOver=showVar('var${idx + 1}'); style= color: #6666FF;>@AA@</a>`;
+                var newVarContent = tempContent.replace("@AA@", varContent);
+                passageContent = passageContent.replace(varContent, newVarContent);
+            }
+
+            const passageHTML = `
+                <div class="passage" id="passage${idx + 1}" style="border:2px gray dashed;padding: 10px; width:80%; margin:0px auto;">
+                    <p id="passage${idx + 1}-eng">${passageData.eng}</p>    
+                    <p id="passage${idx + 1}-zh">${passageContent}</p>
+                    <p id="passage${idx + 1}-zh_level">短文等級:${passageData.level}</p>
+                    <a id="passage${idx + 1}_web" href="${passageData.web}" style="color: #6666FF;">原文連結</a>
+                </div>
+                <br>`;
+            return passageHTML;
+        };
+
+        const createVarElement = (id, words) => {
+            const VarElement = `
+                <div id="${id}" class="var">
+                    <div class="outside">
+                        <div class="title" style="text-align:left;"><strong>${words[0]}</strong></div>
+                        <div class="title3" style="text-align:left">等級:${words[2]}</div>
+                    </div>
+                    <div class="outside">
+                        <div class="title1" style="text-align:left;">${words[1]}</div>
+                        <div class="title3" style="text-align:left;">詞性:${words[3]}</div>
+                    </div>
+                    <hr size="5" color="black">
+                    <div class="title3">
+                        <p>${words[4]}</p>
+                        <hr color="black">
+                        <p>${words[5]}</p>
+                        <hr color="black">
+                        <p>${words[6]}</p>
+                    </div>
+                </div>
+            `
+            return VarElement;
+        };
+
+        // Fetch view point data
+        
+        $.getJSON(`http://localhost:3000/api/viewPoints/${view}`, function(data) {
+        // Update view point information
+        const viewPointData = data[0];
+        $('#viewPoint').text(viewPointData.name);
+        $('#viewPointImage').attr("src", viewPointData.imageUrl);
+        $('#viewPhoto a').attr("href", viewPointData.photoUrl);
+        $('#viewMap a').attr("href", viewPointData.map);
+        $('#viewWeb a').attr("href", viewPointData.web);
+        });
+
+        function loadData(view){
+        $.getJSON(`http://localhost:3000/api/passages/${view}`, function (data) {
+            data.forEach((passageData, idx) => {
+                // Parse contents and words from JSON string to object
+                const contents = JSON.parse(passageData.contents);
+                const words = JSON.parse(passageData.words);
+                
+                // Create passage HTML and append to container
+                if (contents && contents.length > 0){
+                    const passageElement = createPassageHTML(
+                        passageData,
+                        idx,
+                        contents
+                    );
+                $(`#passagesContainer`).append(passageElement);  // 將生成的元素添加到body的最後面
+                
+                
+                // Create var HTML and append to container
+                const varElement = createVarElement(`var${idx + 1}`, words);
+                $('#passagesContainer').append(varElement);
+                } else {
+                    $(`#passage${idx + 1}-zh`).hide();
+            }
+        });
+    });    
+}
+function setMenu(view) {
+        $.getJSON(`http://localhost:3000/api/viewPoints/`, function(data) {
+            let mrtHtml = '';
+            let busHtml = '';
+            let lineItem;
+
+            data.forEach(function(item, index) {
+                if (index % VIEW_THRESHOLD  == 0){
+
+                    const line_id = Math.floor(index / VIEW_THRESHOLD);
+                    lineItem = $('<li><span>' + styleSettings[line_id].text + '</span><ul></ul></li>');
+                }
+                const listItem = `<li><a href="new_twpapago.html?view=${item.id}">${item.name}</a></li>`;
+                
+                
+                lineItem.find('ul').append(listItem);
+
+                if (index % VIEW_THRESHOLD  == VIEW_THRESHOLD-1){
+
+                    // Convert the lineItem to HTML string
+                    const lineItemHtml = lineItem.prop('outerHTML');
+
+
+                    // Categorizing the first 25 items as "MRT" and the rest as "BUS"
+                    if (index < 25) {
+                    mrtHtml += lineItemHtml;
+                    } else {
+                    busHtml += lineItemHtml;
+                    }
+
+                }
+            });
+        
+            console.log(mrtHtml)
+        
+        // Appending the HTML to the respective sections
+        $('#MRT').append((mrtHtml));
+        $('#BUS').append((busHtml));
+        
+        });
+
+}
+loadData(view);
+setMenu(view);
+
+        $('body').click(()=>{
+           $('.var').hide(); 
+        });
+} else {
+        console.error('Invalid view parameter.');
+    } 
+
+});
+
+function showVar(varId) {
+$('.var').hide();
+$('#'+varId).show();
+}   
+     
+</script>
+
+<!-- mmenu scripts --> 
+ <script src="js/mmenu.js"></script>
+<script>
+    const api = new Mmenu(document.querySelector('#menu'));
+    api.destroy();
+
+    new Mmenu( document.querySelector( '#menu' ) );
+
+    document.addEventListener( 'click', ( evnt ) => {
+        let anchor = evnt.target.closest( 'a[href^="#/"]' );
+        if ( anchor ) {
+            alert('Thank you for clicking, but that\'s a demo link.');
+            evnt.preventDefault();
+        }
+    });
+</script>

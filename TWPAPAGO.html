@@ -1,0 +1,1050 @@
+
+<!-- saved from url=(0084)file:///C:/Users/user/Desktop/%E5%8F%B0%E7%81%A3PAPAGO/%E5%8F%B0%E7%81%A3PAPAGO.html -->
+<html ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <title>台灣PaPaGO</title>
+        <meta name="description" content="An interactive getting started guide for Brackets.">
+        <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+        <script
+          src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous"></script>
+    
+        <link type="text/css" rel="stylesheet" href="css/demo.css" />
+		<link type="text/css" rel="stylesheet" href="css/mmenu.css" />
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+
+		<!-- IE 10 and 11 polyfills -->
+		<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Array.prototype.filter%2CArray.prototype.forEach%2CArray.prototype.map%2CElement.prototype.cloneNode%2Cdocument.querySelector"></script>
+    
+        <script>
+            (function() {
+            fetch('http://localhost:3000/api/data')
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+            })();
+                    
+            $.urlParam = function (name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+                                  .exec(window.location.search);
+                return (results !== null) ? results[1] || 0 : false;
+            }
+            $(document).ready(function(){
+                
+                $('#gotop').click(function(){
+                    $('html,body').animate({ scrollTop: 0 }, 'slow');   /* 返回到最頂上 */
+                    return false;
+                });
+    
+                /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
+                $(window).scroll(function() {
+                    if ( $(this).scrollTop() > 100){
+                        $('#gotop').fadeIn();
+                    } else {
+                        $('#gotop').fadeOut();
+                    }
+                });
+                var view = $.urlParam('view');
+                
+//                menu_head color
+                var d = document.getElementById("color");
+                if(view>=1 && view<=5)  {d.style.backgroundColor = "#c48c31";}
+                if(view>=6 && view<=10) {d.style.backgroundColor = "#e3002c";}
+                if(view>=11 && view<=15){d.style.backgroundColor = "#008659";}
+                if(view>=16 && view<=20){d.style.backgroundColor = "#f8b61c";}
+                if(view>=21 && view<=25){d.style.backgroundColor = "#0070bd";}
+                if(view>=26 && view<=30){d.style.backgroundColor = "#adadad";}
+                
+//                menu_head text
+                var d = document.getElementById("viewTraffic");
+                if(view>=1 && view<=5)  {d.textContent = "文湖線BR";}
+                if(view>=6 && view<=10) {d.textContent = "淡水信義線R";}
+                if(view>=11 && view<=15){d.textContent = "松山新店線G";}
+                if(view>=16 && view<=20){d.textContent = "中和新蘆線O";}
+                if(view>=21 && view<=25){d.textContent = "板南線BL";}
+                if(view>=26 && view<=30){d.textContent = "臺灣好行";}
+                
+                
+                $('#viewPoint').text(viewPoint[view]);
+                $('#viewPointImage').attr("src", viewPointImageUrl[view]);
+                $('#viewPhoto a').attr("href", viewPointPhoto[view]);
+                $('#viewMap a').attr("href", viewPointMap[view]);
+                $('#viewWeb a').attr("href", viewPointWeb[view]);
+                $('#passage1-eng').html(passage1_eng[view]);
+                $('#passage2-eng').html(passage2_eng[view]);
+                $('#passage3-eng').html(passage3_eng[view]);
+                $('#passage1-zh_level').text("短文等級:"+passage1_level[view]);
+                $('#passage2-zh_level').text("短文等級:"+passage2_level[view]);
+                 $('#passage1_web').attr("href",passage1_web[view]);
+                 $('#passage2_web').attr("href",passage2_web[view]);
+                
+                
+                var passage1 = passage1Content[view][1];
+                if (passage1) {
+                    var var1 = passage1Content[view][0];
+                    var temp1 = "<a href=#passage1; onclick=showVar('var1') onMouseOver=showVar('var1'); style= color: #6666FF;>@AA@</a>";
+                    var newVar1 = temp1.replace("@AA@", var1);
+                    passage1 = passage1.replace(var1, newVar1);
+                    $('#passage1-zh').html(passage1);
+                    
+                    var d = document.getElementById("left1");
+                    d.textContent = var1Content[view][0];
+                    var d = document.getElementById("right1");
+                    d.textContent = "等級 : "+var1Content[view][2];
+                    var d = document.getElementById("left2");
+                    d.textContent = var1Content[view][1];
+                    var d = document.getElementById("right2");
+                    d.textContent = "詞性 : "+var1Content[view][3];
+                    
+                    $('#var1 div p:nth-child(1)').text(var1Content[view][4]);
+                    $('#var1 div p:nth-child(3)').text(var1Content[view][5]);
+                    $('#var1 div p:nth-child(5)').text(var1Content[view][6]);
+
+                    
+                } else {
+                    $('#passage1-zh').hide();
+                }
+                
+                var passage2 = passage2Content[view][1];
+                if (passage2) {
+                    var var2 = passage2Content[view][0];
+                    var temp2 = "<a href=#passage2; onclick=showVar('var2') onMouseOver=showVar('var2')>@AA@</a>";
+                    var newVar2 = temp2.replace("@AA@", var2);
+                    passage2 = passage2.replace(var2, newVar2);
+                    $('#passage2-zh').html(passage2);
+                    
+                    var d = document.getElementById("left3");
+                    d.textContent = var2Content[view][0];
+                    var d = document.getElementById("right3");
+                    d.textContent = "等級 : "+var2Content[view][2];
+                    var d = document.getElementById("left4");
+                    d.textContent = var2Content[view][1];
+                    var d = document.getElementById("right4");
+                    d.textContent = "詞性 : "+var2Content[view][3];
+                    
+                    $('#var2 div p:nth-child(1)').text(var2Content[view][4]);
+                    $('#var2 div p:nth-child(3)').text(var2Content[view][5]);
+                    $('#var2 div p:nth-child(5)').text(var2Content[view][6]);
+                    
+                } else {
+                    $('#passage2-zh').hide();
+                }
+                
+                var passage3 = passage3Content[view][1];
+                if (passage3) {
+                    var d = document.getElementById("passage3");
+                    d.style.border =" 2px gray dashed";
+                    d.style.padding=" 10px";
+                    d.style.width="80%";
+                    d.style.margin="0px auto";
+                    var var3 = passage3Content[view][0];
+                    var temp3 = "<a href=#passage3; onclick=showVar('var3') onMouseOver=showVar('var3')>@AA@</a>";
+                    var newVar3 = temp3.replace("@AA@", var3);
+                    passage3 = passage3.replace(var3, newVar3);
+                    $('#passage3-zh').html(passage3);
+                    
+                    var d = document.getElementById("left5");
+                    d.textContent = var3Content[view][0];
+                    var d = document.getElementById("right5");
+                    d.textContent = "等級 : "+var3Content[view][2];
+                    var d = document.getElementById("left6");
+                    d.textContent = var3Content[view][1];
+                    var d = document.getElementById("right6");
+                    d.textContent = "詞性 : "+var3Content[view][3];
+                    
+                    $('#var3 div p:nth-child(1)').text(var3Content[view][4]);
+                    $('#var3 div p:nth-child(3)').text(var3Content[view][5]);
+                    $('#var3 div p:nth-child(5)').text(var3Content[view][6]);
+                    
+                    $('#passage3-zh_level').text("短文等級:"+passage3_level[view]);
+                    $('#passage3_web a').attr("href",passage3_web[view]);
+                    $('#passage3_web a').text("原文連結");
+                    
+                } else {
+                    $('#passage3-zh').hide();
+                }
+                
+
+                $('body').click(()=>{
+                   $('.var').hide(); 
+                });
+            });
+            function showVar(varId) {
+                $('.var').hide();
+                $('#'+varId).show();
+            }            
+        </script>
+    
+    <style>
+/*       生詞的背景顏色*/
+        .var     {
+                width: 50%;
+                height: 50%;
+                position: fixed;
+                top: 45%;
+                left: 50%;
+                margin: -200px 0 0 -30%;
+                display: table;
+                background : pink;
+                padding:20px 30px; 
+                z-index: 100;
+                box-shadow: 1px 2px 4px;
+                opacity: .95;
+                display: none;
+                overflow-x: hidden;
+                overflow-y:auto;
+                cursor: pointer;
+                }
+        
+/*       往上箭頭*/
+        #gotop {
+                position:fixed;
+                z-index:90;
+                right:30px;
+                bottom:31px;
+                display:none;
+                width:50px;
+                height:50px;
+                color:#fff;
+                background:#33b5e5;
+                line-height:50px;
+                border-radius:50%;
+                transition:all 0.5s;
+                text-align: center;
+                box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+                }
+        
+/*
+       背景圖片
+        body    {
+                background-image: url(https://i.screenshot.net/dxoz4cn?5f2a77e49dcbf5ccb2d627e7b50bfc4d);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-position: center;
+                background-size: cover;
+                background-color: rgba(255, 255, 255, 0.1);
+                }
+*/
+        a:link { 
+                color:#FF0000; 
+                text-decoration:underline; 
+                }
+        a:visited {color: #FF0000}
+        a:active {color: #FF0000}
+        a:hover {color: #FF0000}
+    </style>
+    
+    
+    </head>
+    <body>
+        <div id="page">
+        <div class="header" id=color>
+				<a href="#menu"><span></span></a>
+            <p id="viewTraffic"></p>
+        </div>
+        
+            <h1 id="viewPoint" align="center">陽明山</h1>
+        <div id=color style=padding:5px;margin-bottom:5px;> </div>
+        <div style="text-align:center;">
+            <img width="100%" id="viewPointImage" alt="陽明山" src="image/icon3.png">
+            <br>
+            
+        <!--超連結-->
+            <div style="text-align: center">
+            <div id="viewPhoto" style="display: inline-block;">
+                <a href="#" ;align="center"target="_blank"><img height="75px" src="image/icon.png"></a>
+            </div>
+            <div id="viewMap" style="display: inline-block;">
+                <a href="https://www.google.com/maps/place/%E9%99%BD%E6%98%8E%E5%B1%B1%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92/@25.1942462,121.5587476,17z/data=!3m1!4b1!4m5!3m4!1s0x3442adf824cfc74b:0x5c0be3a34fc3b079!8m2!3d25.1942462!4d121.5609363?hl=zh-TW" target="_blank"><img height="75px" src="image/icon2.png"></a>
+            </div>
+            <div id="viewWeb" style="display: inline-block;">    
+                <a href="https://www.ymsnp.gov.tw/index.php?option=com_content&amp;view=featured&amp;gp=0&amp;Itemid=104" target="_blank"><img height="75px" src="image/icon3.png"></a>
+            </div>
+            </div>
+        </div>
+
+        <h2 align="center">華語短文</h2>
+        
+        <!--短文-->
+            
+        <div class="passage" id="passage1" style="border:2px gray dashed;padding: 10px; width:80%; margin:0px auto;">
+            <p id="passage1-eng">
+            The month of March is a season of flowers and warm weather . Visitors arrive all day long in Yangmingshan . Strolling among the green mountains and on the green grass , they can enjoy fully the beauty of nature .
+            </p>    
+            <p id="passage1-zh">
+            三月，又到了一個群花爭豔、<a href="file:///C:/Users/user/Desktop/%E5%8F%B0%E7%81%A3PAPAGO/%E5%8F%B0%E7%81%A3PAPAGO.html#passage1" onTouch="showVar(&#39;var1&#39;)" onmouseover="showVar(&#39;var1&#39;)" >氣候</a>宜人的季節，陽明山上遊人如織，大家徜徉在青山綠草之間，沐浴在大自然的美景裡。
+            </p>
+            <p id="passage1-zh_level"></p>
+            <a id="passage1_web" href="https://www.taiwan-panorama.com/Articles/Details?Guid=a3f8be72-e11a-4b8e-9438-e500c5a9040e&CatId=1" style="color: #6666FF;">原文連結</a>
+        </div>
+        <br>
+        <div class="passage" id="passage2" style="border:2px gray dashed;padding: 10px;width:80%; margin:0px auto;">
+            <p id="passage2-eng">
+            The effects of this crustal action extend to Taipei , where the Yangmingshan and Tatun mountain ranges remained volcanically active until just 200,000 years ago .
+            </p>
+            <p id="passage2-zh">
+                二十萬年前才結束火山噴發的陽明山國家公園，至今仍以大屯山的地熱、硫磺等火山遺跡<a href="file:///C:/Users/user/Desktop/%E5%8F%B0%E7%81%A3PAPAGO/%E5%8F%B0%E7%81%A3PAPAGO.html#passage2" onclick="showVar(&#39;var2&#39;)" onmouseover="showVar(&#39;var2&#39;)">傲人</a>。
+            </p>
+            <p id="passage2-zh_level"></p>
+            <a id="passage2_web" href="https://www.taiwan-panorama.com/Articles/Details?Guid=a3f8be72-e11a-4b8e-9438-e500c5a9040e&CatId=1" style="color: #6666FF;">原文連結</a>
+        </div>        
+        <br>
+        <div class="passage" id="passage3">
+            <p id="passage3-eng">
+            " The reeds and rushes are ashy grey / The white dew has become frost " --The Book of Odes . The autumn winds give a deep sense of the season , and on Yangmingshan seas of blooming silvergrass plumes sway elegantly in the breeze . As they move , it is as if they were pulling back the curtains for the season .
+            </p>
+            <p id="passage3-zh">
+<!--                「蒹葭蒼蒼，白露為霜」，秋風正起，秋意漸濃，一望無際的芒花在陽明山盛開起來，<a href="file:///C:/Users/user/Desktop/%E5%8F%B0%E7%81%A3PAPAGO/%E5%8F%B0%E7%81%A3PAPAGO.html#passage3" onclick="showVar(&#39;var3&#39;)" onmouseover="showVar(&#39;var3&#39;)">宛如</a>白浪翻騰，漫漫的花海以數大為美之姿，舒展蒼茫的風韻，搖曳中為人們悄悄拉開了秋天的序幕。-->
+            </p>
+            <p id="passage3-zh_level"></p>
+            <div id="passage3_web">
+                <a href="#" style="color: #6666FF;"></a> 
+            </div>
+        </div>
+            
+        <div id="var1" class="var">
+        
+            <div class="outside">
+                <div id="left1" class="title" style="text-align:left;"><strong>#left1</strong></div>
+              <div id="right1" class="title3" style="text-align:left";> #right1</div>
+            </div>
+            <div class="outside">
+              <div id="left2" class="title1" style="text-align:left;">#left2</div>
+              <div id="right2" class="title3" style="text-align:left;">#right2</div>
+            </div>
+            <hr size="5" color="black">
+            
+            <div class="title3">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+                <hr color="black">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+                <hr color="black">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+            </div>
+                
+        </div>
+        
+        <div id="var2" class="var">
+            <div class="outside">
+                <div id="left3" class="title" style="text-align:left;"><strong>#left1</strong></div>
+                <div id="right3" class="title3" style="text-align:left";> #right1</div>
+            </div>
+            <div class="outside">
+                <div id="left4" class="title1" style="text-align:left;">#left2</div>
+                <div id="right4" class="title3" style="text-align:left;">#right2</div>
+            </div>
+            <hr size="5" color="black">
+            <div class="title3">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+                <hr color="black">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+                <hr color="black">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+            </div>
+        </div>
+        
+        <div id="var3" class="var">
+            <div class="outside">
+                <div id="left5" class="title" style="text-align:left;"><strong>#left1</strong></div>
+                <div id="right5" class="title3" style="text-align:left";> #right1</div>
+            </div>
+            <div class="outside">
+                <div id="left6" class="title1" style="text-align:left;">#left2</div>
+                <div id="right6" class="title3" style="text-align:left;">#right2</div>
+            </div>
+            <hr size="5" color="black">
+            <div class="title3">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+                <hr color="black">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+                <hr color="black">
+                <p>古氣候學是對古代氣候的研究和描述。</p>
+            </div>
+        </div>
+        
+        <!-- GoTop -->
+        <a href="#viewPoint" id="gotop">
+            <i class="fa fa-angle-up"></i>
+            <p style="margin-top: -15">Top</p>
+        </a>
+        
+        <!-- mmenu HTML -->
+        <nav id="menu">
+				<ul>
+					<li><a href="index.html">首頁</a></li>
+					<li><span>臺北捷運MRT</span>
+						<ul>
+							<li><span>文湖線BR</span>
+                                <ul>
+                                    <li><a href="TWPAPAGO.html?view=1">臺北市立動物園 Taipei Zoo</a></li>
+                                     <li><a href="TWPAPAGO.html?view=2">貓空纜車 Maokong Gondola</a></li>
+                                     <li><a href="TWPAPAGO.html?view=3">指南宮 Zhinan Temple</a></li>
+                                     <li><a href="TWPAPAGO.html?view=4">松山機場 The Taipei Songshan airport</a></li>
+                                     <li><a href="TWPAPAGO.html?view=5">大湖公園 Dahu Park</a></li>
+                                </ul>
+                            </li>
+                            <li><span style="background-color:#e3002c;">淡水信義線R</span>
+                                <ul>
+                                    <li><a href="TWPAPAGO.html?view=6">臺北101 Taipei 101</a></li>
+                                    <li><a href="TWPAPAGO.html?view=7">陽明山 Yangmingshan National Park</a></li>
+                                    <li><a href="TWPAPAGO.html?view=8">北投 Beitou District</a></li>
+                                    <li><a href="TWPAPAGO.html?view=9">大安森林公園 Daan Park</a></li>
+                                    <li><a href="TWPAPAGO.html?view=10">永康 Yongkang Street  Area</a></li>
+                                </ul>
+                            </li>
+                            <li><span style="background-color:#e3002c;">松山新店線G</span>
+                                <ul>
+                                    <li><a href="TWPAPAGO.html?view=11">中正紀念堂 National Chiang Kai-shek Memorial Hall</a></li>
+                                    <li><a href="TWPAPAGO.html?view=12">歷史博物館 National Museum of History</a></li>
+                                    <li><a href="TWPAPAGO.html?view=13">碧潭 Bitan Scenic Area</a></li>
+                                    <li><a href="TWPAPAGO.html?view=14">饒河街夜巿 Raohe Street Tourist Night Market</a></li>
+                                    <li><a href="TWPAPAGO.html?view=15">仙跡岩 Xianjiyan</a></li>
+                                </ul>
+                            </li>
+                            <li><span>中和新蘆線O</span>
+                                <ul>
+                                    <li><a href="TWPAPAGO.html?view=16">行天宮 Xingtian Temple</a></li>
+                                    <li><a href="TWPAPAGO.html?view=17">迪化街 Dihua Street</a></li>
+                                    <li><a href="TWPAPAGO.html?view=18">光華商場 Guanghua Market</a></li>
+                                    <li><a href="TWPAPAGO.html?view=19">華山1914文化創意產業園區 Huashan 1914 Creative Park</a></li>
+                                    <li><a href="TWPAPAGO.html?view=20">蘆洲李宅 Li Family Abode</a></li>
+                                </ul>
+                            </li>
+                            <li><span>板南線BL</span>
+                                <ul>
+                                    <li><a href="TWPAPAGO.html?view=21">板橋林家花園 The Lin Family Mansion and Garden</a></li>
+                                    <li><a href="TWPAPAGO.html?view=22">龍山寺 Lungshan Temple</a></li>
+                                    <li><a href="TWPAPAGO.html?view=23">國父紀念館 National Dr.Sun Yat-sen Memorial Hall</a></li>
+                                    <li><a href="TWPAPAGO.html?view=24">剝皮寮 Bopiliao Historic Block</a></li>
+                                    <li><a href="TWPAPAGO.html?view=25">西門紅樓 The Red House</a></li>
+                                </ul>
+                            </li>
+						</ul>
+					</li>
+					<li><span>臺灣好行BUS</span>
+                        <ul>
+                            <li><a href="TWPAPAGO.html?view=26">陽明書屋 Yangmingshuwu</a></li>
+                            <li><a href="TWPAPAGO.html?view=27">深坑老街 Shenkeng Old Street</a></li>
+                            <li><a href="TWPAPAGO.html?view=28">九份 Jiufen</a></li>
+                            <li><a href="TWPAPAGO.html?view=29">朱銘美術館 Juming Museum</a></li>
+                            <li> <a href="TWPAPAGO.html?view=30">十分瀑布 Shifen Scenic Area</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html"target=_blank>關於</a></li>
+				</ul>
+            </nav>
+        
+        <!-- mmenu scripts -->
+		<script src="js/mmenu.js"></script>
+		<script>
+			new Mmenu( document.querySelector( '#menu' ) );
+
+			document.addEventListener( 'click', ( evnt ) => {
+				let anchor = evnt.target.closest( 'a[href^="#/"]' );
+				if ( anchor ) {
+					alert('Thank you for clicking, but that\'s a demo link.');
+					evnt.preventDefault();
+				}
+			});
+		</script>
+        
+        <!-- data -->
+        <script>
+            var viewPoint = ['', 
+                             '臺北市立動物園 Taipei Zoo',
+                            '貓空纜車 Maokong Gondola',
+                            '指南宮 Zhinan Temple',
+                            '松山機場 The Taipei Songshan airport',
+                            '大湖公園 Dahu Park',
+                            '臺北101 Taipei 101',
+                            '陽明山 Yangmingshan National Park',
+                            '北投 Beitou District',
+                            '大安森林公園 Daan Park',
+                            '永康 Yongkang Street Area',
+                            '中正紀念堂 National Chiang Kai-shek Memorial Hall',
+                            '歷史博物館 National Museum of History',
+                            '碧潭 Bitan Scenic Area',
+                            '饒河街夜巿 Raohe Street Tourist Night Market',
+                            '仙跡岩 Xianjiyan',
+                            '行天宮 Xingtian Temple',
+                            '迪化街 Dihua Street',
+                            '光華商場 Guanghua Market',
+                            '華山1914文化創意產業園區 Huashan 1914 Creative Park',
+                            '蘆洲李宅 Li Family Abode',
+                            '板橋林家花園 The Lin Family Mansion and Garden',
+                            '龍山寺 Lungshan Temple',
+                            '國父紀念館 National Dr.Sun Yat-sen Memorial Hall',
+                            '剝皮寮 Bopiliao Historic Block',
+                            '西門紅樓 The Red House',
+                            '陽明書屋 Yangmingshuwu',
+                            '深坑老街 Shenkeng Old Street',
+                            '九份 Jiufen',
+                            '朱銘美術館 Juming Museum',
+                            '十分瀑布 Shifen Scenic Area',];
+            var viewPointImageUrl  = ['',
+                            'https://photo.travelking.com.tw/scenery/6BAE69E4-3197-47E1-8FE4-7B7A39874159_e.jpg',
+                            'http://pic.pimg.tw/bwpingu/49a80a39239ed.jpg',
+                            'http://4.bp.blogspot.com/-uo1INWjO-nE/VkiV0RoiYFI/AAAAAAAABDc/zUJOd6xJiRQ/s1600/Zhinan%2BTemple%2B%25E6%258C%2587%25E5%258D%2597%25E5%25AE%25AE.jpg',
+                            'https://images.chinatimes.com/newsphoto/2019-08-04/900/20190804002527.jpg',
+                            'https://imgs.weekendhk.com/wp-content/uploads/2014/10/126.jpg',
+                            'https://blog.kkday.com/wp-content/uploads/Taiwan_Taipei_Taipei-101_AShutterstock_28310509.jpg',
+                            'https://storage.googleapis.com/smiletaiwan-cms-cwg-tw/article/201805/article-5afd3c77edcdf.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8.jpg/1200px-%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8.jpg',
+                            'https://upload.wikimedia.org/wikipedia/commons/9/9f/Taipei_Daan_Park_-_Ecological_Pool_-_20180805_-_02.jpg',
+                            'https://live.staticflickr.com/5657/23599120275_58dd95a55d_b.jpg',
+                            'https://www.travel.taipei/image/63532/1024x768',
+                            'https://www.travel.taipei/image/63477/1024x768',
+                            'https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_2187_5.jpg',
+                            'https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_R177_10.jpg',
+                            'https://www.travel.taipei/image/64376/1024x768',
+'https://i.ytimg.com/vi/ugNJE8AnEzM/maxresdefault.jpg',
+'https://live.staticflickr.com/5524/30347883093_71746724c8_b.jpg',
+'https://doqvf81n9htmm.cloudfront.net/data/crop_article/92039/shutterstock_1029548500.jpg_1140x855.jpg',
+'https://www.huashan1914.com/WebUPD/huashan1914/Index/Huashan-1914-Creative-Park(1).jpg',
+'https://np.cpami.gov.tw/filesys/image/01_chinese/12_equarterly/201412/12-1.png',
+'https://scontent-sea1-1.cdninstagram.com/vp/6250886f3f459794ae56dddfb7c997db/5DE86C1F/t51.2885-15/e35/s1080x1080/64320848_615873595582950_6918398497200463187_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com',
+'http://www.formosaimage.com/gallery2/main.php?g2_view=core.DownloadItem&g2_itemId=106596&g2_serialNumber=2',
+'https://big5.minghui.org/mh/article_images/2019-3-25-taibei-sun-yat-sen-memorial-hall_01.jpg',
+'https://www.caesarmetro.com/upload/explore/attraction%20bopiliao.jpg',
+'https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_7387_1.jpg',
+'https://www.travel.taipei/image/90498/1024x768',
+'http://3.bp.blogspot.com/-jBx3VeNDXMU/U7Q3WigLgAI/AAAAAAAAl6A/FDxDQEM6kus/s1600/30+Shenkeng+Old+Street+(%E6%B7%B1%E5%9D%91%E8%80%81%E8%A1%97)+-+The+Tofu+Capital+@+Taipei+%5BTaiwan%5D+(Large).JPG',
+'https://image.cdn-eztravel.com.tw/ck53Ve1RevNoQ1OOSU5_TNNnz5B1BLPTuSCUdRL_Igg/rs:fit:0:0:1/g:ce/aHR0cDovL3d3dy5lenRyYXZlbC5jb20udHcvc3Nfc3RhdGljL2ltYWdlcy9odGwvVEtBSTAwMDAwNzI5NF8wMi5qcGc.jpg',
+'https://farm6.staticflickr.com/5712/20491020689_dddf0199eb_b.jpg',
+'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/ShiFengWaterFall_002.jpg/1280px-ShiFengWaterFall_002.jpg',];
+            var viewPointPhoto=['',
+                'https://www.google.com/search?q=%E5%8F%B0%E5%8C%97%E5%8B%95%E7%89%A9%E5%9C%92&rlz=1C1DLBX_zh-TWTW810TW813&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjRg_Cppo7kAhW3zIsBHTvKAtUQ_AUIEigC&biw=1280&bih=610',
+                'https://www.google.com/search?q=%E8%B2%93%E7%A9%BA%E7%BA%9C%E8%BB%8A&rlz=1C1DLBX_zh-TWTW810TW813&source=lnms&tbm=isch&sa=X&ved=0ahUKEwibo5XK-J_kAhUMCqYKHRKRDe8Q_AUIEigC&biw=1280&bih=610',
+                'https://www.google.com/search?biw=1536&bih=755&tbm=isch&sa=1&ei=PGZRXaChF-aHr7wPteWTuAM&q=%E6%8C%87%E5%8D%97%E5%AE%AE&oq=%E6%8C%87%E5%8D%97%E5%AE%AE&gs_l=img.3..0l10.10309.10309..10753...0.0..0.40.40.1......0....2j1..gws-wiz-img.Pwo65ukvqhs&ved=0ahUKEwigr_vxtP3jAhXmw4sBHbXyBDcQ4dUDCAY&uact=5',
+                'https://www.google.com/search?biw=1536&bih=755&tbm=isch&sa=1&ei=NGZRXbmWG9WWr7wP-7-JEA&q=%E6%9D%BE%E5%B1%B1%E6%A9%9F%E5%A0%B4&oq=%E6%9D%BE%E5%B1%B1%E6%A9%9F%E5%A0%B4&gs_l=img.3..0l10.6700.6700..7188...0.0..0.36.36.1......0....2j1..gws-wiz-img._YEcImNU7Sg&ved=0ahUKEwi5gJfutP3jAhVVy4sBHftfAgIQ4dUDCAY&uact=5',
+                'https://www.google.com/search?q=%E5%A4%A7%E6%B9%96%E5%85%AC%E5%9C%92&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjv6qTttP3jAhUyw4sBHQsLDykQ_AUIEigC&biw=1536&bih=755',
+                'https://www.google.com/search?q=%E5%8F%B0%E5%8C%97101&rlz=1C1DLBX_zh-TWTW810TW813&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjjo9u-gLbjAhVKhrwKHTJEDAgQ_AUIESgC&biw=1280&bih=610',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=1_UrXcOUL7aXr7wPpvKs2As&q=%E9%99%BD%E6%98%8E%E5%B1%B1&oq=%E9%99%BD%E6%98%8E%E5%B1%B1&gs_l=img.3..0l10.92725.96034..96598...0.0..0.44.465.15......0....1..gws-wiz-img.....0..35i39j0i24.aQth_GcnA6A',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=rUBaXeH2OtPemAW0qK2QBA&q=%E5%8C%97%E6%8A%95&oq=%E5%8C%97%E6%8A%95&gs_l=img.3..0l10.281378.283323..284026...0.0..0.39.230.7......0....1..gws-wiz-img.....0..0i24._i5yvhb_Q4k&ved=0ahUKEwihgbqrpo7kAhVTL6YKHTRUC0IQ4dUDCAY&uact=5',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=OfYrXaTVDq62mAWUs5PQCg&q=%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92&oq=%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92&gs_l=img.3..0l10.207562.207562..208029...0.0..0.35.35.1......0....2j1..gws-wiz-img.wkykoR4Qkfo',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=XPcrXeGmK7zVmAWshY2ICw&q=%E6%B0%B8%E5%BA%B7%E8%A1%97&oq=%E6%B0%B8%E5%BA%B7%E6%8E%A5&gs_l=img.1.0.0i10i24j0i24.2009.2607..4852...0.0..0.41.141.4......0....1..gws-wiz-img.mPEuRuOSnYw',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=XPcrXeGmK7zVmAWshY2ICw&q=%E6%B0%B8%E5%BA%B7%E8%A1%97&oq=%E6%B0%B8%E5%BA%B7%E6%8E%A5&gs_l=img.1.0.0i10i24j0i24.2009.2607..4852...0.0..0.41.141.4......0....1..gws-wiz-img.mPEuRuOSnYw',
+                'https://www.google.com.tw/search?hl=zh-TW&tbm=isch&source=hp&biw=1284&bih=697&ei=Xg08XYX7KaXFmAXBgqHwBQ&q=%E6%AD%B7%E5%8F%B2%E5%8D%9A%E7%89%A9%E9%A4%A8&oq=%E6%AD%B7%E5%8F%B2%E5%8D%9A%E7%89%A9%E9%A4%A8&gs_l=img.12..0l8j0i5i30l2.2756.9693..12973...1.0..0.59.1125.31......0....1..gws-wiz-img.....0..0i24j0i30.vr75SQUTD0Q&ved=0ahUKEwiFooiY2dTjAhWlIqYKHUFBCF4Q4dUDCAU',
+                'https://www.google.com.tw/search?hl=zh-TW&biw=1284&bih=697&tbm=isch&sa=1&ei=bA08Xfa0C5qEoATP_q_YAw&q=%E7%A2%A7%E6%BD%AD&oq=%E7%A2%A7%E6%BD%AD&gs_l=img.12..0l10.3945081.3949884..3953258...2.0..0.43.433.12......0....1..gws-wiz-img.......0i30j0i24j0i5i30.v-cCoXwNlrw&ved=0ahUKEwj2msCe2dTjAhUaAogKHU__CzsQ4dUDCAY',
+                'https://www.google.com.tw/search?hl=zh-TW&biw=1284&bih=697&tbm=isch&sa=1&ei=3hw8XYbnGoTFmAWuk6TQDg&q=%E9%A5%92%E6%B2%B3%E8%A1%97%E5%A4%9C%E5%B7%BF&oq=%E9%A5%92%E6%B2%B3%E8%A1%97%E5%A4%9C%E5%B7%BF&gs_l=img.12...1272335.1272335..1273336...0.0..0.35.35.1......0....2j1..gws-wiz-img.rCH6PuHMK8A&ved=0ahUKEwiGzoT859TjAhWEIqYKHa4JCeoQ4dUDCAY',
+                'https://www.google.com.tw/search?hl=zh-TW&biw=1284&bih=697&tbm=isch&sa=1&ei=EyI8XfvUNcf1wAOemJygBw&q=%E4%BB%99%E8%B7%A1%E5%B2%A9&oq=%E4%BB%99%E8%B7%A1%E5%B2%A9&gs_l=img.12..0l10.406168.406168..406882...0.0..0.39.39.1......0....2j1..gws-wiz-img.tt0remfhJRM&ved=0ahUKEwi7qu_37NTjAhXHOnAKHR4MB3QQ4dUDCAY',
+                'https://www.google.com.tw/search?hl=zh-TW&tbm=isch&source=hp&biw=1536&bih=754&ei=XrIqXYjmG5Hv-Qbn7oq4DA&q=%E8%A1%8C%E5%A4%A9%E5%AE%AE&oq=%E8%A1%8C%E5%A4%A9&gs_l=img.1.0.0l10.680841.691070..692646...0.0..1.111.5190.107j2......1....2j1..gws-wiz-img.....0..0i24.C36SJUKLEX8',
+                'https://www.google.com/search?q=%E8%BF%AA%E5%8C%96%E5%95%86%E5%9C%88&source=lnms&tbm=isch&sa=X&ved=0ahUKEwj6k7W1nL7jAhWS62EKHccxDz8Q_AUIEigC&biw=1536&bih=706',
+                'https://www.google.com.tw/search?hl=zh-TW&tbm=isch&source=hp&biw=1536&bih=754&ei=nXA0XZa3BOitmAXnmoG4Dg&q=%E5%85%89%E8%8F%AF%E5%95%86%E5%A0%B4&oq=%E5%85%89%E8%8F%AF%E5%95%86%E5%A0%B4&gs_l=img.3..0l5j0i24j0l3j0i5i30.91802.91802..92563...0.0..0.677.822.5j5-1......0....2j1..gws-wiz-img.....0.UtHWti0oDKA&ved=0ahUKEwjW-eLalsbjAhXoFqYKHWdNAOcQ4dUDCAU&uact=5',
+                'https://www.google.com/search?q=%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiz5Zq7psjjAhV0KqYKHdCsBuQQ_AUIEigC&biw=1536&bih=754',
+                'https://www.google.com.tw/search?hl=zh-TW&biw=1536&bih=754&tbm=isch&sa=1&ei=_HA0XZ-kDpyGr7wPxPmSgAI&q=%E8%98%86%E6%B4%B2%E6%9D%8E%E5%AE%85&oq=%E8%98%86%E6%B4%B2%E6%9D%8E%E5%AE%85&gs_l=img.3..0l4j0i24l6.2536304.2536304..2536907...0.0..0.63.63.1......0....2j1..gws-wiz-img.pDlfIkDGWKQ&ved=0ahUKEwifkpOIl8bjAhUcw4sBHcS8BCAQ4dUDCAY&uact=5',
+                'https://www.google.com.tw/maps/uv?hl=zh-TW&pb=!1s0x3442a80291b1b5f9%3A0xb891f90afecb5572!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4shttps%3A%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNWKQxcu4YiyiTbcR9fXVEyT1oISVKlSvTurhBZ%3Dw325-h218-n-k-no!5z5p6X5a626Iqx5ZySIC0gR29vZ2xlIOaQnOWwiw!15sCAQ&imagekey=!1e10!2sAF1QipNWKQxcu4YiyiTbcR9fXVEyT1oISVKlSvTurhBZ',
+                'https://www.google.com.tw/maps/uv?hl=zh-TW&pb=!1s0x3442a9a8d7e7de09%3A0xf8e8335e58c41c8a!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4shttps%3A%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipM_mQEo6HvE07H71dA4jYYh7qdvR0v5EDCwuHft%3Dw243-h200-k-no!5z6b6N5bGx5a-6IC0gR29vZ2xlIOaQnOWwiw!15sCAQ&imagekey=!1e10!2sAF1QipM_mQEo6HvE07H71dA4jYYh7qdvR0v5EDCwuHft&sa=X&ved=2ahUKEwjArsrAoNTjAhW5zIsBHQ1_BbAQoiowCnoECA4QBg',
+                'https://www.google.com.tw/maps/uv?hl=zh-TW&pb=!1s0x3442a9eec87122c3%3A0xbe4641f96f0e578a!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4s%2F%2Flh4.googleusercontent.com%2Fproxy%2FTa9du5rTBXrLDogd3R1Tl7kI45Jx5TNewY7r5GFF3fr-AZ4hDGMlLrMwt8q6BuAxDTBKyNDTDhepxFxs49cQTBfz5qe7AuBD2FfZ7l__g4n0Vur2yK1qxpNKjlLb_1z4evA_zye9Hk3IYMcAbQWMWrXUPXCxc1c%3Dw299-h200-k-no!5z5ZyL54i257SA5b-16aSoIC0gR29vZ2xlIOaQnOWwiw!15sCAQ&imagekey=!1e1!2shttp%3A%2F%2Ft1.gstatic.com%2Fimages%3Fq%3Dtbn%3AANd9GcRwBKTXqCvVUolN76w3LFHnqYhVmvAaeUdhhB2lOskiS_gUML4B&sa=X&ved=2ahUKEwjhn_qUodTjAhXaLqYKHUk4AxMQoiowDHoECAwQBg',
+                'https://www.google.com.tw/maps/@25.0368421,121.5021662,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPBGKNTTwrNAXMhN-d64oJYM55QCCWSwVmWwbtl!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPBGKNTTwrNAXMhN-d64oJYM55QCCWSwVmWwbtl%3Dw129-h86-k-no!7i6000!8i4000',
+                'https://www.google.com.tw/maps/uv?hl=zh-TW&pb=!1s0x3442a909a4acec8b%3A0x7c34275cfedcc1c5!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4shttps%3A%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNKppdM1dnFnXOW07kfII6-IANU3IMHcK6r1fpI%3Dw300-h200-k-no!5z6KW_6ZaA57SF5qiTIC0gR29vZ2xlIOaQnOWwiw!15sCAQ&imagekey=!1e10!2sAF1QipNKppdM1dnFnXOW07kfII6-IANU3IMHcK6r1fpI&sa=X&ved=2ahUKEwidwqejotTjAhWMBKYKHY4HDVsQoiowE3oECBAQBg',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=n4BjXZiWKZHdmAWU7pm4DQ&q=%E9%99%BD%E6%98%8E%E6%9B%B8%E5%B1%8B&oq=%E9%99%BD%E6%98%8E%E6%9B%B8%E5%B1%8B&gs_l=img.3..0j0i24l9.68127.68127..68753...0.0..0.33.33.1......0....2j1..gws-wiz-img.gdxrEkmiIDs&ved=0ahUKEwjY4ZHL-J_kAhWRLqYKHRR3BtcQ4dUDCAY&uact=5',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=5YBjXc_QFKmKr7wP37SVKA&q=%E6%B7%B1%E5%9D%91%E8%80%81%E8%A1%97&oq=%E6%B7%B1%E5%9D%91%E8%80%81%E8%A1%97&gs_l=img.3..0l10.63986.68455..68990...0.0..0.45.556.19......0....1..gws-wiz-img.....0..35i39j0i24j0i30.YQd7QXzyPxk&ved=0ahUKEwiP163s-J_kAhUpxYsBHV9aBQUQ4dUDCAY&uact=5',
+                'https://www.google.com/search?q=%E4%B9%9D%E4%BB%BD&rlz=1C1DLBX_zh-TWTW810TW813&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjUo7r7-Z_kAhX_y4sBHdhRAQkQ_AUIEigC&biw=1280&bih=610',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=E4JjXfnCHtC9hwPzr4qQAQ&q=%E6%9C%B1%E9%8A%98%E7%BE%8E%E8%A1%93%E9%A4%A8&oq=%E6%9C%B1%E9%8A%98%E7%BE%8E%E8%A1%93%E9%A4%A8&gs_l=img.3..0l7j0i30j0i24l2.9512.12934..13411...0.0..0.82.691.19......0....1..gws-wiz-img.....0..0i10i24.OkYQBTAdyaE&ved=0ahUKEwi5mLj8-Z_kAhXQ3mEKHfOXAhIQ4dUDCAY&uact=5',
+                'https://www.google.com/search?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&tbm=isch&sa=1&ei=E4JjXfnCHtC9hwPzr4qQAQ&q=%E5%8D%81%E5%88%86%E7%80%91%E5%B8%83&oq=%E5%8D%81%E5%88%86&gs_l=img.1.0.0l10.936.2100..5324...0.0..1.224.376.6j0j1......0....1..gws-wiz-img.....0..35i39.th4r2xvk5b4',];
+            var viewPointMap = ['',
+'https://www.google.com/maps/place/%E8%87%BA%E5%8C%97%E5%B8%82%E7%AB%8B%E5%8B%95%E7%89%A9%E5%9C%92/@24.9983469,121.5810358,15z/data=!4m5!3m4!1s0x0:0xaafe06fd09b4d766!8m2!3d24.9983469!4d121.5810358',
+'https://www.google.com/maps/place/%E9%99%BD%E6%98%8E%E5%B1%B1%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92/@25.1942462,121.5587476,17z/data=!3m1!4b1!4m5!3m4!1s0x3442adf824cfc74b:0x5c0be3a34fc3b079!8m2!3d25.1942462!4d121.5609363?hl=zh-TW',
+'https://www.google.com/maps/place/%E6%8C%87%E5%8D%97%E5%AE%AE/@24.9776724,121.5822574,15.44z/data=!4m5!3m4!1s0x3442aa81e8703b57:0x3fae2a0f2cb677cc!8m2!3d24.979824!4d121.586626?hl=zh-TW',
+'https://www.google.com/maps/place/%E8%87%BA%E5%8C%97%E6%9D%BE%E5%B1%B1%E6%A9%9F%E5%A0%B4/@25.0675708,121.5505103,17z/data=!3m2!4b1!5s0x3442abf105e0df25:0x870a006bd7331030!4m5!3m4!1s0x3442abf1a4142659:0x93180ddcb6758a3a!8m2!3d25.067566!4d121.552699?hl=zh-TW',
+'https://www.google.com/maps/place/%E5%A4%A7%E6%B9%96%E5%85%AC%E5%9C%92(%E9%98%B2%E7%81%BD%E5%85%AC%E5%9C%92%EF%BC%89/@25.0822853,121.6022632,17z/data=!3m1!4b1!4m5!3m4!1s0x3442acea866a6e2f:0xb251bab667083c8f!8m2!3d25.0822805!4d121.6044519?hl=zh-TW',
+'https://www.google.com/maps/place/110%E5%8F%B0%E7%81%A3%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80%E4%BF%A1%E7%BE%A9%E8%B7%AF%E4%BA%94%E6%AE%B57%E8%99%9F%E5%8F%B0%E5%8C%97101%E5%A4%A7%E6%A8%93/@25.0339639,121.5622835,17z/data=!3m1!4b1!4m5!3m4!1s0x3442abb6da9c9e1f:0x1206bcf082fd10a6!8m2!3d25.0339639!4d121.5644722?hl=zh-TW',
+'https://www.google.com/maps/place/%E9%99%BD%E6%98%8E%E5%B1%B1%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92/@25.1942462,121.5587476,17z/data=!3m1!4b1!4m5!3m4!1s0x3442adf824cfc74b:0x5c0be3a34fc3b079!8m2!3d25.1942462!4d121.5609363?hl=zh-TW',
+'https://www.google.com/maps/place/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8/@25.1365857,121.5049551,17z/data=!3m1!4b1!4m5!3m4!1s0x3442ae50f43af1e9:0xadf18f29697c0a3c!8m2!3d25.1365766!4d121.5071537?hl=zh-TW',
+'https://www.google.com/maps/place/%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92/@25.032435,121.5327167,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a9803a65369f:0x61fb21e8f586e51f!8m2!3d25.032435!4d121.5349054?hl=zh-TW',
+'https://www.google.com/maps/place/106%E5%8F%B0%E7%81%A3%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E6%B0%B8%E5%BA%B7%E8%A1%97/@25.0307657,121.5273411,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a983bf3ca4f9:0x52d54638cd5328d1!8m2!3d25.0307657!4d121.5295298?hl=zh-TW',
+'https://www.google.com/maps/place/%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82/@25.0346167,121.519587,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a99db9a2a94d:0x43e9034292df69b2!8m2!3d25.0346119!4d121.521781',
+'https://www.google.com/maps/place/%E5%9C%8B%E7%AB%8B%E6%AD%B7%E5%8F%B2%E5%8D%9A%E7%89%A9%E9%A4%A8/@25.0315746,121.5090107,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a9a3ad3d1ecf:0x99a6838a6811d6ec!8m2!3d25.0315698!4d121.5111994',
+'https://www.google.com/maps/place/%E7%A2%A7%E6%BD%AD/@24.9562146,121.5337977,17z/data=!3m1!4b1!4m5!3m4!1s0x3468018789e88f2d:0x99c5d97207d24208!8m2!3d24.9559849!4d121.5365043',
+'https://www.google.com/maps/place/%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82/@25.0509589,121.5753367,17z/data=!3m1!4b1!4m5!3m4!1s0x3442ab9c0db4a583:0x3da21183815df6f6!8m2!3d25.0509541!4d121.5775254',
+'https://www.google.com/maps/search/%E4%BB%99%E8%B7%A1%E5%B2%A9/@24.9923892,121.5452563,17z/data=!3m1!4b1',
+'https://www.google.com/maps/place/%E8%A1%8C%E5%A4%A9%E5%AE%AE/@25.0630699,121.531713,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a959a9ce781b:0xb0c2ef0be716c094!8m2!3d25.0630699!4d121.5339017',
+'https://www.google.com/maps/place/%E8%BF%AA%E5%8C%96%E8%A1%97/@25.0560105,121.5077502,17z/data=!4m8!1m2!2m1!1z6L-q5YyW5ZWG5ZyI!3m4!1s0x3442a913890b7179:0x7af18ed3310911d5!8m2!3d25.0551047!4d121.5100372',
+'https://www.google.com.tw/maps/place/%E5%85%89%E8%8F%AF%E5%95%86%E5%A0%B4/@25.0450188,121.5305944,17.26z/data=!4m5!3m4!1s0x3442a9634439ce7d:0x4cd6385059c7f187!8m2!3d25.0450021!4d121.5321956?hl=zh-TW',
+'https://www.google.com/maps/place/%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80/@24.9885397,121.276499,11z/data=!4m8!1m2!2m1!1z6I-v5bGx!3m4!1s0x3442a96523e0246d:0xf1c9276707165c71!8m2!3d25.0441303!4d121.5293995',
+'https://www.google.com.tw/maps/place/%E8%98%86%E6%B4%B2%E6%9D%8E%E5%AE%85%E5%8F%A4%E8%B9%9F/@25.0853749,121.4644662,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a8b66964e8f9:0xee93b4dbf975babe!8m2!3d25.0853749!4d121.4666549?hl=zh-TW',
+'https://www.google.com.tw/search?q=%E6%9E%97%E5%AE%B6%E8%8A%B1%E5%9C%92&ie=&oe=&npsic=0&rflfq=1&rlha=0&rllag=25010847,121454417,55&tbm=lcl&rldimm=13299685000221513074&ved=2ahUKEwj_jo6XoNTjAhVlG6YKHY-KCLIQvS4wAHoECAoQEg&rldoc=1&tbs=lrf:!2m1!1e2!3sIAE,lf:1,lf_ui:2#rlfi=hd:;si:13299685000221513074;mv:!1m2!1d25.0112724!2d121.4548106!2m2!1d25.010422499999997!2d121.45402379999999!3m12!1m3!1d414.29712609828675!2d121.45441720000001!3d25.010847449999996!2m3!1f0!2f0!3f0!3m2!1i19!2i22!4f13.1;tbs:lrf:!2m1!1e2!3sIAE,lf:1,lf_ui:2',
+'https://www.google.com.tw/maps/uv?hl=zh-TW&pb=!1s0x3442a9a8d7e7de09%3A0xf8e8335e58c41c8a!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4s%2Fmaps%2Fplace%2F%25E9%25BE%258D%25E5%25B1%25B1%25E5%25AF%25BA%2F%4025.0366522%2C121.499848%2C3a%2C75y%2C5.35h%2C90t%2Fdata%3D*213m4*211e1*213m2*211sdD7PtS97AQlDeQCo2WjlEg*212e0*214m2*213m1*211s0x3442a9a8d7e7de09%3A0xf8e8335e58c41c8a%3Fsa%3DX!5z6b6N5bGx5a-6IC0gR29vZ2xlIOaQnOWwiw!15sCAQ&imagekey=!1e2!2sdD7PtS97AQlDeQCo2WjlEg&sa=X&ved=2ahUKEwjArsrAoNTjAhW5zIsBHQ1_BbAQpx8wCnoECA4QCw',
+'https://www.google.com.tw/maps/uv?hl=zh-TW&pb=!1s0x3442a9eec87122c3%3A0xbe4641f96f0e578a!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4s%2Fmaps%2Fplace%2F%25E5%259C%258B%25E7%2588%25B6%25E7%25B4%2580%25E5%25BF%25B5%25E9%25A4%25A8%2F%4025.0393952%2C121.5596024%2C3a%2C75y%2C-259.6h%2C90t%2Fdata%3D*213m4*211e1*213m2*211sNUGPdmo2oq-vpx_k-6v74A*212e0*214m2*213m1*211s0x3442a9eec87122c3%3A0xbe4641f96f0e578a%3Fsa%3DX!5z5ZyL54i257SA5b-16aSoIC0gR29vZ2xlIOaQnOWwiw!15sCAQ&imagekey=!1e2!2sNUGPdmo2oq-vpx_k-6v74A&sa=X&ved=2ahUKEwjhn_qUodTjAhXaLqYKHUk4AxMQpx8wDHoECAwQCw',
+'https://www.google.com/maps/place/%E5%89%9D%E7%9A%AE%E5%AF%AE%E6%AD%B7%E5%8F%B2%E8%A1%97%E5%8D%80/@25.036838,121.4999761,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a9a8d017b6dd:0xff3361bbadd40fe9!8m2!3d25.036838!4d121.5021648',
+'https://www.google.com/maps/place/%E8%A5%BF%E9%96%80%E7%B4%85%E6%A8%93/@25.0420139,121.5046705,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a909a4acec8b:0x7c34275cfedcc1c5!8m2!3d25.0420139!4d121.5068592',
+'https://www.google.com/maps?q=%E9%99%BD%E6%98%8E%E6%9B%B8%E5%B1%8B&rlz=1C1DLBX_zh-TWTW810TW813&um=1&ie=UTF-8&sa=X&ved=0ahUKEwi82tei-5_kAhWFF6YKHbl3A5gQ_AUIESgB',
+'https://www.google.com/maps/place/222%E6%96%B0%E5%8C%97%E5%B8%82%E6%B7%B1%E5%9D%91%E5%8D%80%E6%B7%B1%E5%9D%91%E8%A1%97/@25.0016916,121.612549,17z/data=!3m1!4b1!4m5!3m4!1s0x3442aac505124e55:0x5f1415f00949f3f5!8m2!3d25.0016916!4d121.6147377',
+'https://www.google.com/maps?q=%E4%B9%9D%E4%BB%BD&rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&um=1&ie=UTF-8&sa=X&ved=0ahUKEwi5mLj8-Z_kAhXQ3mEKHfOXAhIQ_AUIDSgB',
+'https://www.google.com/maps?rlz=1C1DLBX_zh-TWTW810TW813&biw=1280&bih=610&q=%E6%9C%B1%E9%8A%98%E7%BE%8E%E8%A1%93%E9%A4%A8&uact=5&um=1&ie=UTF-8&sa=X&ved=0ahUKEwjkqaOD-p_kAhWMHHAKHbZrDJUQ_AUIDSgB',
+'https://www.google.com/maps/search/%E5%8D%81%E5%88%86%E7%80%91%E5%B8%83/@25.048265,121.782889,17z/data=!3m1!4b1',];
+            var viewPointWeb=['',
+                             'https://english.zoo.gov.taipei/',
+'https://english.gondola.taipei/',
+'https://www.travel.taipei/en/attraction/details/483',
+'https://www.tsa.gov.tw/tsa/en/home.aspx',
+'https://www.travel.taipei/en/attraction/details/529',
+'https://www.taipei-101.com.tw/en/index.aspx',
+'https://www.ymsnp.gov.tw/index.php?option=com_content&view=featured&gp=0&Itemid=104',
+'https://english.gov.taipei/cp.aspx?n=1163FEB04E2A3189',
+'https://www.travel.taipei/en/attraction/details/524',
+'https://www.travel.taipei/en/attraction/details/1696',
+'https://en.cksmh.gov.tw/',
+'https://www.nmh.gov.tw/en/index.htm',
+'https://tour.ntpc.gov.tw/en-us/Attraction/Detail?wnd_id=85&id=111425',
+'https://eng.taiwan.net.tw/m1.aspx?sNo=0002016&id=R177',
+'https://www.travel.taipei/en/attraction/details/520',
+'https://www.travel.taipei/en/attraction/details/484',
+'https://eng.taiwan.net.tw/m1.aspx?sNo=0002016&id=418',
+'https://www.travel.taipei/en/shop/details/551',
+'https://www.huashan1914.com/w/huashan1914_en/index',
+'https://www.travel.taipei/en/attraction/details/669',
+'http://en.linfamily.ntpc.gov.tw/',
+'http://www.lungshan.org.tw/en/index.php',
+'https://en.yatsen.gov.tw/',
+'https://www.bopiliao.taipei/en',
+'https://www.redhouse.taipei/index_en.aspx',
+'https://www.ymsnp.gov.tw/index.php?option=com_tourmap&view=tourmap&id=19&gp=0&Itemid=510',
+'https://www.travel.taipei/en/attraction/details/662',
+'https://eng.taiwan.net.tw/m1.aspx?sNo=0002016&id=290',
+'https://www.juming.org.tw/mainssl/modules/MySpace/index.php?sn=ec&pg=ZC843601&lang=en',
+'https://eng.taiwan.net.tw/m1.aspx?sNo=0002016&id=R11',];
+            var passage1_eng=['',
+//                              文湖線
+                             'On October 30th 1986 the new zoo at Mucha was officially opened , thirty times larger than the original , and at Yuanshan an era came to a close .',
+                              'The novelty of Maokong &apos;s new cable car has attracted a great number of visitors , many of whom have come up from central and southern Taiwan especially to ride it .',
+                              'He recalls that on his first visit , he spent a day at Chihnan Temple in southern Taipei , and was fascinated by it , deciding to become a follower of Taoism . At that time he asked if he could spend a night in the temple , but his guides did not think it appropriate and his mother did not agree , so he had to give up the idea .',
+                              'With economic and social progress , the little zoo came to seem inadequate , and concerns were expressed about the effect on the animals of cramped conditions , and noise from the nearby Sungshan Airport .',
+                              'There had not been flooding for over a decade in the Neihu District , and the floodwater reached a depth of 1.6 meters on the day Winnie struck Taiwan . The Tahu neighbor hood chief believes that the flooding occurred because two floodgates for the lake at Tahu Park were not opened in time .',
+//                              淡水信義線
+                             'The fact that it was completed is a testament to Taiwan &apos;s economic tenacity . Now it is the site of the biggest New Year &apos;s fireworks display in any Chinese-speaking territory , making it a symbol of Taipei &apos;s festiveness and Taiwan &apos;s vitality as well .',
+                              'The month of March is a season of flowers and warm weather . Visitors arrive all day long in Yangmingshan . Strolling among the green mountains and on the green grass , they can enjoy fully the beauty of nature .',
+                              'But the Hot Springs Museum doesn &apos;t just chart the development of Peitou and tell the story of its springs ; its creation also sparked the idea of the " Peitou Eco-museum , " and it provides an excellent model for making new use of an historical site .',
+                              'Public art adorns stations along the Xinyi Line ; in the open-air plaza at Da ’ an Park Station , you will find a brass frog ( above ) as well as the -installation art work Autumn Leaves Traveler ( below ) ; and at Taipei 101 Station , the motif is faces of old and young displayed on a futuristic mechanical installation called Meeting Time ( facing page ) .',
+                              '	The historic establishment of Da-an Park--the newest , largest patch of green in downtown Taipei--in the early &apos; 90s , and the introduction of the two-day weekend in 1998 , dramatically increased weekend and holiday crowds in the tiny Yungkang area . It also became a culinary mecca for foreign tourists .',
+//                             松山新店線
+                              'The major colors of blue and white used in the Memorial symbolize liberty and equality in the same way as the White Sun in the Blue Sky , which comprise the national flag of the Republic of China , and give the impression of peace and dignity .',
+                              '" These are just two basic forms for traditional flower arrangement , " explains Huang Yung-ch &apos;uan , a research associate at the history museum and a behind-the-scenes player in organizing the exhibitions . The organizers deduced the forms from ancient materials and arranged examples to introduce them ; this also gives people a broader base and more space to create when they try their own hands at arranging .',
+                              'From lesbian relationships to youth culture , from the streets of Kuala Lumpur to the beaches of Taiwan , these eight films came together under the name of " Taiwan Den Young . " Through events such as Kenting &apos;s Spring Scream and the Pitan Music Festival , these films hope to revive the spirit of Taiwan film in the 1980s and create a new spring for Taiwan film using the strength of a new community of film directors .',
+                              'The Raohe Street Tourist Night Market officially opened for business in May 1987 , to much popular acclaim .',
+                              'The exquisite Holy Relic Rock on T &apos;ien T &apos;ai Mountain in the Peng Hu Isles is believed by the local people to be a foot-print left behind by the god .',
+//                             中和新蘆線
+                              'It is an overcast , rainy day in Taipei , but Hsingtien-kung Temple , which is widely regarded as having excellent divinatory powers , is full of believers .',
+                              'Twenty years ago , walking along Taipei &apos;s Tihua Street one could savor the fragrance of tea , and even with one &apos;s eyes closed one would know one was passing a tea merchant &apos;s shop .',
+                              'When asked this , most people will immediately answer Guanghua Technology Market , known as " Taiwan &apos;s Akihabara . " Here you can find monitors , hard disks , cases , graphics cards , RAM sticks , cables , printers , and anything else you might want . With its myriad of stores and brands , comparison shopping is easy , and it has become the first choice of many in Taipei looking for computer parts .',
+                              'During the damp , dark days of winter , while the city of Taichung was warily preparing for a visit from Chen Yunlin , president of mainland China &apos;s Association for Relations Across the Taiwan Straits , a heart-to-heart encounter between Taiwan and the mainland was quietly taking place in a corner of Huashan Culture Park in Taipei .',
+                              'Although the Li Family Compound in Luchou is dreadfully dilapidated , it preserves a complete cultural site , and it also preserves all kinds of things associated with people and events in the Li family .',
+//                             板南線
+                              'Fresh flowing water Since the September 21 earthquake , the Lin Family Gardens in Panchiao have been undergoing reconstruction . On a weekend afternoon , though , you can still see a few people strolling about the " Mirror Pond Studio " in one corner of the gardens , admiring the play of light on the pond , sitting along the pathways or in pavilions reading , or chatting with friends .', 'The renovations centered around Longshan Temple aim to make the area western Taipei &apos;s go-to destination for religious tourism . From Longshan Temple MRT Station , Bangka Park , and the Wanhua District Administrative Center to the new Longshan Market , the area has it all-food and fun , spirituality and shopping .', 'Later , a younger generation of mainstream architects sought to redefine Taiwan ’ s Chinese architectural tradition , designing works such as Taipei ’ s Sun Yat-sen Memorial Hall , Shihlin ’ s Fu-le Beverages Building , the Ministry of Education building , and the Sungshan Airport expansion . However , before these expressions of nationalism had their moment , they were overshadowed by the consumerist , commercialized architecture of the 1970s .', 'After the city government exercised eminent domain over Bopiliao , it set up a task force to study how to restore the old neighborhood and how to make use of it .', 'The Red House shopping area in the city &apos;s Ximending area , considered the flagship project of the municipal government &apos;s urban renewal program for the older districts of western Taipei , has experienced a renaissance due in large part to entrepreneurship in the gay community , testifying to the diversity of Wanhua today and making Taipei a richer city-culturally and commercially .',
+//                             台灣好行
+                              'The materials include Kuomintang historical documents , central government files , periodicals , books , microfilms , tapes , films , and photos .',
+                              'On a 1980s weekend , as thousands of people crowd into the historic streets of Taipei County &apos;s Shenkeng , a production line in a busy factory on nearby Peishen Road rolls out an orderly stream of numerical gauges for test equipment . The scene records the vitality of Taiwan &apos;s SMEs at that time .',
+                              'The fate of the temple was a microcosm of the fate of Chiufen ; when the gold ran out , both fell into serious decline .',
+                              'The next time you find yourself with time on your hands on a sunny day , throw on something casual and head for " the museum with an attitude . " A fun attitude . There &apos;s something for everyone here .',
+                              'The narrow gorges and steep cliffs along the Keelung River create numerous waterfalls , among which Shihfen Falls , between Shihfen and Tahua , is known as Taiwan &apos;s Niagara .'];
+            var passage2_eng=['',
+//                              文湖線
+                             'According to statistics , an average of around 200,000 people visit Taipei Zoo each month . It takes only 20 minutes from the zoo to Maokong by cable car , so the city government estimates that the Maokong Gondola should bring on average about 20,000 visitors per day to Maokong .',
+                              'If each of them spends NT $ 2-300 , it could bring several billion dollars into the area &apos;s business coffers each year .',
+                              'However , there is also a long-standing taboo : according to legend , if new lovers go to the temple then they will become quarrelsome and might even split up .',
+                              'Thus once we began direct cross-strait flights , the Japanese were immediately willing to establish a link between Songshan Airport [ in Taipei ] and Haneda Airport [ in Tokyo ] , and beginning next year there will be four flights per day each way . This was previously inconceivable .',
+                              'For example , when the commission recently held a Mother &apos;s Day celebration in Neihu &apos;s Tahu Park , he organized students to mail out 2000 invitations . Some letters had to be hand-delivered to those without addresses , and this motivated the recipients to take the first step toward greater involvement .',
+//                              淡水信義線                              
+                              'Every weekend since Taipei 101 went up , the department stores of the Hsinyi district have been bustling with activity , with events and promotions of all kinds pulling in the customers .',
+                              'The effects of this crustal action extend to Taipei , where the Yangmingshan and Tatun mountain ranges remained volcanically active until just 200,000 years ago .',
+                              'Long before Han Chinese arrived , Peitou had an aura of mystery about it , shadowy and wreathed in mist . For this reason the Aboriginal Ketagalan people living nearby named it " shamaness , " which in their language sounds similar to the Taiwanese pronunciation of the characters for " peitou . "',
+                              'The refracted light coming through the glass tower , combined with the multicolored light show accompanying the dancing fountains , give Da ’ an Park Station the appearance of a treasure chest full of glittering jewels ',
+                              'Near Yungkang Park are the Chungli Beef Restaurant , which has served beef viscera soup and satay sauce beef for over 20 years , the Lusang Restaurant , dedicated to Ilan cuisine , and Sit-Fun Shih Tang , which specializes in local Taiwanese dishes .',
+//                             松山新店線
+                              'In March , at the Chiang Kai-shek Memorial Hall , the largest and longest-running student demonstration in Taiwanese history occurred .',
+                              'Taiwan Gets a Look at the Dawn of Civilization Following the recent completion of the popular exhibition of terracotta warriors from mainland China , which drew millions of visitors , a new exhibit of items from the Louvre &apos;s collection of Mesopotamian artifacts is generating more long lines in front of Taipei &apos;s National Museum of History .',
+                              'The main subjects are two old men strolling along the Pitan embankment in Hsintien , their faces each revealing the traces of time .',
+                              'Taipei currently has roughly 30 night markets . The Snake Alley ( Huaxi Street ) and Raohe Street night markets are the oldest of these , and have been flourishing beside the Longshan and Ciyou Temples since these were founded in 1738 and 1757 respectively .',
+                              ' Because he fell with such force , his footprints were embedded in the boulder . Ever since this has been called " Immortal Footprint Rock . "',
+//                             中和新蘆線
+                              'It is October 13th , and Typhoon Zeb won &apos;t make landfall until tomorrow . Strong winds have brought brilliant , clear skies to Taiwan . A bright sun shines down on the stone steps of Hsing Tien Temple in Taipei .',
+                              'On a hot day , sitting down and drinking a refreshing bowl of it is a good way to cool down . A woman buying some on Tihua Street in Taipei says she likes it because it does wonders for her skin , just like xiancao jelly .',
+                              ' Guanghua Technology Market might be packed with options , but storeowners have long been under pressure from brandholders like Asus and Gigabyte to sell their products at a specified price , and they will call and complain if being undercut , " says Xiao Cai-real name Cai Mingyu-shedding light on the realities of pricing at Guanghua Market .',
+                              'The carved Buddha heads for sale on the sidewalk outside the Huashan Culture Park look like sages who have transcended the illusory emotions of the human world and are here merely for a moment &apos;s respite .',
+                              'It is later generations &apos; spirit of cherishing and protecting an old house which makes it a &apos; living monument , &apos; " says architecture scholar Wang Chen-hua , who is currently involved in planning the future use of the Li Family Compound .',
+//                             板南線
+                              'When one thinks of Panchiao , the Lin Family Garden comes immediately to mind .',
+                              'The Soul of Western Taipei--The Longshan Temple Area Not long ago , Longshan Temple-the spiritual heart of Taipei &apos;s Wanhua District-celebrated its 270th anniversary . By it sit Bangka Park and Longshan Temple Underground Shopping Bazaar , landmark locations in the movement to renovate the district and turn its fortunes around .',
+                              'The Golden Tripod Awards Ceremony is different from most others in that winners are announced well beforehand .',
+                              'Bopiliao is an " old neighborhood reuse " project as provided for in the Cultural Heritage Preservation Act , so the restoration methods are not the same as those employed with actual historic monuments .', 'In the 1970s when West Gate took off as a youth-oriented neighborhood , the Red House began to fall into decline , and in 1981 it was abandoned .',
+//                             台灣好行
+                              'Near Taipei , the former Yangming Archive , which has just been taken over by Yangmingshan National Park , is a wonderful spot to visit .',
+                              'In fine clay bricks , craftsmen would carve images of objects or patterns . The beauty of brick carving in traditional Taiwanese architecture can be enjoyed along the old streets of Sanhsia and Shenkeng , in the Lin Family Compound of Panchiao , and in the old residences of Yuanli in Miaoli . Carved bricks are in the gatehouses , the lintels , the roofs , and even the furniture , brush holders and fruit platters .',
+                              'Yen Yun-nien , Taiwan &apos;s Mining Magnate Though all gone now , the gold of Chiufen gave the locale a certain mystique . ',
+                              'Thanks to this imaginative approach , the visitor to Juming Museum can get involved in the creative process himself .',
+                              'The tracks wind through the Keelung River Valley ; the journey features beautiful verdant mountains , the Shihfen Waterfall , the Lingchiao Waterfall , the Tahua " Teapot " Cave , and other sights . As relics of the long-gone glory days of the mining industry glide by the train &apos;s window , the sound of chugging wheels is complemented by the gurgle of flowing water , making for a lovely effect .'];
+            var passage3_eng=['',
+//                              文湖線                              
+                              ' Such shocks are unknown at the current zoo in Mucha , partly because down through the years at Yuanshan , people came to understand animals a little better . ',
+                              '',
+                              ' The common people worship him as a god and have raised many temples in his honor , one example being Taipei &apos;s popular Chih-nan Kung , or Hsien Kung Miao . He is also the patron deity of various occupations , including barbers , fortune-tellers , ink makers , and even beggars . ',
+                              ' The information hot line office is located in the Tourism Bureau &apos;s Tourist Service Center on the second floor at Sung Shang Airport in Taipei . Services provided by the hot line include general domestic tourist information , tourist complaint handling , translation , emergency and accident assistance , and lost-and-found services . ',
+                              '',
+//                              淡水信義線                              
+                              'In contrast to these scholarly views of Yushan and Taipei 101 as symbols of national sovereignty and competitiveness , the New York Times &apos; travel section recently featured a piece on Taipei which depicted Taipei 101 and the Hsinyi District around it as a youthful consumer &apos;s paradise . Taipei 101 can thus be seen as a softer , cultural symbol--it &apos;s open to interpretation .',
+                              '" The reeds and rushes are ashy grey / The white dew has become frost " --The Book of Odes . The autumn winds give a deep sense of the season , and on Yangmingshan seas of blooming silvergrass plumes sway elegantly in the breeze . As they move , it is as if they were pulling back the curtains for the season .',
+                              '','','',
+//                              松山新店線
+                              'When you get to the Chiang Kai-shek Memorial in Taipei , you see a gaggle of men dressed up as " old grandmas . " Their faces are painted with rouge , and they wear skirts splashed with red and green . They carry fans in their left hands and parasols in their right . The gaudy makeup attracts a great number of curious people who want to have commemorative photos taken .',
+                              'Sponsored by the National Museum of History and the United Daily News , the exhibition comprises 169 works from the Indian Museum in Calcutta , spanning nearly 5000 years from 2500 BC to the 20th century . It offers museum goers a glimpse into the diversity of Indian culture and religion .',
+                              'For Dragon Boat Festival , many con-venience stores and supermarkets were offering brand-name zongzi delivered to your door , but media reports of food hygeine problems with the sticky-rice treat caused me to lose my appetite for them . This year , I didn &apos;t have a single one . Instead , I took advantage of the weekend to head off to a Dragon Boat Festival jazz concert by Hsintien &apos;s Pitan Bridge . It was a great feeling .',
+                              ' In preparation for the 1975 widening of Bade Road at Raohe Street , the city government decided to relocate local street vendors to Nansong Market under the MacArthur Bridge . But some vendors resisted and came into conflict with the police .',
+                              ' Other popular trails in cluded Warship Rock in Tienmu , Tiger and Elephant mountains in the Hsinyi District , and the Yuan Tung Temple in Chungho .',
+//                             中和新蘆線
+                              'All the women who volunteer their services at Hsing Tien Temple understand that they cannot go to the temple during their menstrual period . A common sight at temple festivals in Taiwan is the jitong , or spirit medium , who defies nature by piercing his body and walking over hot coals without bleeding or blistering .',
+                              'Because many businessmen in the area adhere to the old idea of loyalty , they are trusted by their customers .',
+                              'Kuanghua Market has been operating for more than 32 years now , but in the minds of young people , it &apos;s a place to buy electronic goods . It &apos;s the elder generation who associate it with used book stalls .',
+                              'The art critic Huang Haiming made the following comparison : " The Songshan Tobacco Factory doesn &apos;t require many changes . It is a place well suited for strolling and thinking , and it has high potential as a general arts village . In comparison , the Huashan Art District is much rougher and has the look of abandoned ruins , so it is better suited as an alternative and youth-oriented arts space .',
+                              'The true yeoman spirit The Li Family Compound in Luchou differs markedly from other well-known private houses in that it does not share the sumptuous decoration of the homes of the gentry and the wealthy , with their carved and painted beams . There is nothing superfluous in the design of the buildings .',
+//                             板南線
+                              '','','','','',
+//                             台灣好行
+                              'Scholars are provided with visual records of events as they happened .',
+                              '',
+                              'Ancient vs. modern The flood of consumers has changed life in Chiufen . ',
+                              'So this museum doesn &apos;t just belong to Ju Ming or his family . It belongs to everyone in Taiwan !',
+                              ''];
+            var passage1Content = [[],
+//               文湖線
+               ['規劃','因此台北市政府決定在木柵規劃一座比圓山大卅倍的動物園。七十五年十月卅一日，木柵動物園正式開幕，為圓山動物園的輝煌歷史劃上休止符。'],['上路','貓纜上路，人氣頗旺，許多中南部旅遊團專程北上，為的就是要搭乘貓空纜車。'],
+                ['參觀','記得第一次來台時，他到指南宮參觀，受到極大的吸引，決定信仰道教，當時他要求在寺中過夜，但陪同人員認為不妥，他母親也不准，還未成年的他只好算了。'],
+                ['長久','然而隨著經濟、社會的發展，人們不再滿足於這小小的動物園，而且也注意到動物們長久居處狹窄，及因靠近松山機場的噪音問題，不但容易性情不穩，死亡率也會增加。'],
+                ['鬧','內湖十多年來未曾鬧過水患，此次溫妮來襲水淹最高深達一米六，當地裡長認為淹水的主因是通往大湖公園的兩道調節水量閘門未能及時開啟。'],
+//               淡水信義線                                   
+                ['活力','因此101大樓的興建完成，是台灣經濟韌性與活力的展現，現在更以華人地區最盛大的跨年煙火秀著名，成為歡樂台北、活力台灣的象徵。'],
+                ['氣候','三月，又到了一個群花爭豔、氣候宜人的季節，陽明山上遊人如織，大家徜徉在青山綠草之間，沐浴在大自然的美景裡。'],
+                ['博物館','北投溫泉博物館不僅紀錄著北投的發展、溫泉的故事，也帶動整個北投生態博物館觀念的形成，堪稱是古蹟再利用的最佳典範。'],
+                ['森林','捷運信義線沿途車站，皆配置了別具巧思的公共藝術：大安森林公園站露天庭園的鑄銅青蛙；以及「秋葉旅人」裝置藝術，台北101站（右）則有以老人和兒童互動臉譜，串連未來意象的「相遇時刻」翻牌機械裝置。'],
+                ['轉捩點','永康街另一個歷史轉捩點發生在1990年代初期大安森林公園落成，成為台北市中心面積最大的綠地空間，加上1998年起「週休二日制」陸續實施，導致永康社區這塊彈丸之地的假日人潮遽增，並成為外國觀光客品嚐美食的朝聖處。'],
+//                松山新店線
+                ['主體','中正紀念堂的主體是白色，雙層的人字形屋頂，鋪著寶藍色的琉璃瓦，藍中帶紫，與燦爛的陽光相映，分外莊嚴高貴。'],
+                ['傳統','「這只是兩種傳統插花的基本形式」，歷史博物館研究員，也是插花展的幕後功臣黃永川表示，他們由古代資料中歸納、整理出幾種花型介紹給國人，好讓大家在試著插作時，有更多發揮的依據和空間。'],
+                ['感到','從同志情感到青少年文化、從馬來西亞吉隆坡的街頭到台灣環島風光，8部國片以「台片發春」之名攜手合作，結合墾丁「春天吶喊」、碧潭音樂季等系列活動，希望繼1980年代台灣新電影風潮之後，繼續以導演互相跨刀支持的團結力量，開創國片又一春。'],
+                ['觀光','「饒河街觀光夜市」在民國76年5月正式開幕時，輿論曾給予「饒河街復活了！」的大幅報導與肯定。'],
+                ['留下','景美的仙跡岩、澎湖望安島的天台山上，當地人也都相傳是祂留下的腳印。'],
+//                中和新蘆線
+                ['公認','臺北的一個陰雨天，被民間公認極具靈感的行天宮香客如織'],
+                ['閉','二十年前，走過台北迪化街會有茶香，閉著眼睛都知道是經過茶行。'],
+                ['眾多','多數人會脫口而出的共同答案，通常是有「台灣秋葉原」之稱的光華商場，這裡從螢幕、硬碟、機殼、顯示卡、記憶體、線材、電容、印表機等一應俱全，品牌及店家眾多，比價方便，是民眾買零件組裝電腦的首選。'],
+                ['心靈','陰濕寒冬中，當台中市為大陸海協會會長陳雲林的到訪而緊張戒備時，在台北華山創意園區的角落，一場兩岸的心靈邂逅，正悄悄上演。'],
+                ['不堪','「蘆洲李宅雖然破舊不堪，可是卻保留了完整的文化遺蹟，也保留著我們李家的種種人、事物。'],                    
+//                板南線
+                ['花園','經過九二一地震，板橋林家花園大半地方在整建，假日午後，仍有三三兩兩的遊客漫步在花園一角的「方鑑齋」，觀賞池塘裡的天光雲影，有人在迴廊與亭閣裡看書、與朋友談心。'],
+                ['改造','萬華龍山寺核心區的改造，是以打造台北西區「宗教觀光勝地」為目標，從龍山寺捷運站、艋舺公園、區政中心到新龍山商場，有吃有玩、有進香有購物，一氣呵成。'],
+                ['年輕','後來年輕一代的主流建築師，希望重新定義台灣的中華建築傳統，於是出現了台北國父紀念館、士林福樂冷飲部、教育部、松山機場擴建等作品，但這種自覺式的民族思潮創作還來不及發光，就被一九七○年代的消費性商業建築阻斷了。'],
+                ['美好','老街厝邊星散後，命運各不相同，有些老店堅守傳承，另找新店址重起爐灶，更多人則選擇歇業，讓美好記憶永遠停格在剝皮寮。蛻變•新生而市府自1999年正式徵收剝皮寮後，也組成專案小組，研討老街應如何修復？修復後又應該如何使用？'],
+                ['計畫','定位為北市「軸線翻轉」旗艦計畫的西門紅樓周邊商圈，因彩虹旗飄揚而意外重生，見證了萬華的多采風姿，也讓台北更豐富而多元。'],
+//                台灣好行
+                 ['總理','藏有聞名中外的「大溪檔案」除了總理、總裁及先烈遺物之外，一般歷史學者最關心的，還是陽明書屋所典藏的史料。'],
+                ['遊客','1980年代，假日的台北縣深坑老街湧進成千上萬的遊客，就在不遠處的北深路上一棟大樓內，全年無休的生產輸送帶上，排序運送出來的是一台台用來測量儀器的數位電錶，忙碌的工廠景象記憶了當年台灣中小企業創業的活力。'],
+                ['命運','福山宮和九份金礦命運相繫。廿年前九份金盡人散，廟裡的香客便日益稀少。'],
+                ['公園','在這個公園一般的「朱銘美術館」裡，藝術與大自然合而為一，是藝術家朱銘這一生美學與創作的總結。'],
+                ['瀑布','像基隆河谷狹隘、地勢陡降，落差造成多處瀑布，在十分到大華站中間的「十分瀑布」，即有「台灣的尼加拉瓜瀑布」之譽。']];
+            var passage2Content = [[],
+//               文湖線            
+                ['統計','據統計，木柵動物園平均一個月有20萬人次的遊客，從動物園搭乘纜車上貓空，只要20分鐘就可到達。'],
+                 ['商機','因此台北市政府評估，貓纜平均每天可以帶進2萬名旅客，以每人消費二、三百元計算，每年可為該地區帶進數十億元商機。'],
+                 ['信徒','至今指南宮香火鼎盛、信徒不少，但卻有個相傳已久的忌諱﹘﹘據說戀愛中的男女若相偕到指南宮，就會變成吵吵鬧鬧的冤家，甚至分手。'],
+                 ['雙方','所以兩岸一直航，日本人隨即願意跟台灣建立松山機場跟羽田機場的連繫，自明年起，每天雙方各飛4個航班，這在過去是沒辦法想像的。'],
+                 ['步','就像這次原住民委員會在大湖公園舉辦的原住民母親大會，他就動員學生們寄發兩千份邀請函，那些沒有地址的，就得親自送去，讓他們說服自己跨出第一步。'],
+//               淡水信義線            
+                ['自從','自從有了台北101，每逢假日，信義計畫區各大百貨公司無不卯足力氣，祭出各式各樣的促銷活動來招攬顧客。'],
+                ['火山','二十萬年前才結束火山噴發的陽明山國家公園，至今仍以大屯山的地熱、硫磺等火山遺跡傲人。'],
+                ['之前','其實，早於漢人進入之前，籠罩在一片煙霧飄渺中的北投，充滿神秘感，因而被居住在附近的凱達格蘭族人稱為「女巫之地」，之後因為音似台語的「北投」而得名。'],
+                ['投射','玻璃光塔投射的光影，以及在五彩燈光下熠熠閃耀的噴泉水舞，讓入夜後的大安森林公園站，變身為城市裡的發光寶盒。'],
+                ['形成','接近永康公園處，則有以牛雜湯及沙茶牛肉為賣點的二十多年老店「中壢牛家莊」、以宜蘭美食為特色的「呂桑食堂」、和台菜為主的「喫飯食堂」，形成獨樹一格的本土風味。'],
+//                松山新店線
+                ['規模','三月，台北市中正紀念堂廣場上爆發一場台灣史上規模最大的學生運動。'],
+                ['參觀','創百萬參觀人數的《兵馬俑──秦文化特展》甫落幕不久，來自羅浮宮首度外借的美索不達米亞文物特展，又使得國立歷史博物館前大排長龍。'],['痕跡','主題是新店碧潭堤岸上的兩位散步老人，以一種恬澹、自若的神態與裝扮前行，容顏中各有其歲月痕跡的淡然神色。'],
+                ['伴隨','目前台北市約有30個夜市，大者如士林、松山饒河街，小者如農安街巷內、南昌街郵政醫院旁約有二十多攤；歷史悠久者如華西街和饒河街，都伴隨著附近廟宇如龍山寺（1738年）、慈祐宮（1757年）的香火鼎盛而繁榮至今。'],
+                ['由於','由於下墜之勢過劇，岩石上因此烙下了他的一雙足印，後人便名此岩為「仙跡岩」。'],
+//                中和新蘆線
+                ['陽光','農曆八月二十三日，瑞伯颱風侵台的前一天下午，強風吹得天空一片青藍，陽光烈烈地照在台北行天宮的台階上。'],
+                ['採購','一位在迪化街採購的小姐就說她非常喜歡吃龜苓膏，因為和仙草一樣，可以養顏美容。'],
+                ['店家','「光華商場的品項當然是很齊全，然而店家都有和原廠簽長期約的壓力，像華碩、技嘉的主機板價格如果低過牌告售價時，馬上會接到上游廠商的『關切』，」綽號「小蔡」的網路賣家蔡明諭，一語道破光華商家的訂價策略。'],
+                ['好似','華山藝文特區外的人行道旁，擺放了藝術家雕作的佛頭，好似早已參透人世間愛恨情仇的智者，來此紅塵小歇。'],
+                ['參與','「只有硬體保存的古蹟是假古董，而後代子孫對於老房子能珍惜愛護的精神才是『活古蹟』，蘆洲李宅就是這樣一座活古蹟的好範例。」目前參與蘆洲李宅未來使用規畫的建築學者王鎮華指出。'],
+//                板南線
+                ['城市','她在近十年來發展神速，居民生活水準也不斷提高。更可喜的，是居民們透過社區發展計畫，共同推動改善生活的素質，使他們所居住的城市得以繼續建設發展，生機無限。開拓之始提起板橋，人們常會很自然的聯想到板橋有名的林家花園'],
+                ['不久','不久前歡慶建成270週年的艋舺龍山寺，是萬華的信仰中心，其周圍的「艋舺公園」與「龍山寺地下街商場」，則是台北「軸線翻轉」的指標建設，也是改造萬華「核心區」的重要行動。'],
+                ['典禮','盛大的頒獎典禮於去年十二月廿二日晚上在可容納二千餘人的國父紀念館舉行。'],
+                ['文化','因剝皮寮屬於「文化資產保存法」下的古街再利用，因此修復的手法與真正的古蹟不同，有較多靈活運用的可能性。'],
+                ['興起','七○年代西門町興起，位於西門一隅的紅樓龍蛇雜處，逐漸沒落，而在一九八○年人去樓空。'],
+//                台灣好行
+                ['國家','此外，在台北市，剛剛歸屬陽明山國家公園的陽明書屋，是個絕好去處。'],
+                ['花紋','工匠在質地細密的特製土磚上雕刻物像或花紋，台灣的傳統建築，如三峽老街、深坑老街、板橋林家花園、苗栗苑裡老宅等的門樓、門楣、屋頂，甚至傢俱、筆筒、果盤上的雕刻，都能欣賞到磚雕之美。'],
+                ['色彩','九份是台灣最富傳奇色彩的地方，因為它曾經有金。'],
+                ['參觀','進入朱銘美術館，參觀者不再是一個單純參觀者，更可以是一個創作者。'],
+                ['沿途','鐵道全線蜿蜒於基隆河谷，沿途層巒疊翠，中途有十分瀑布、嶺腳瀑布、大華壺穴等景點，昔日礦業風華遺跡滑過窗外，隆隆行軌配上淙淙水聲，很是動人。']];
+            var passage3Content = [[],
+//                文湖線
+                ['動物園','這些缺失，在現在新穎、專業化的木柵動物園已不復見。多年來，人們也由圓山動物園認識了許多動物的習性。'],
+                [],
+                ['百姓','民間百姓信仰他，立廟奉祀，像台北名勝指南宮（仙公廟）就香火鼎盛；同時呂洞賓也是不少行業的祖師，如理髮、算命、製墨業者，甚至乞丐都拜他。'],
+                ['項目','專線設於台北市松山機場二樓觀光局旅遊服務中心內，服務項目包括國內一般旅游資訊洽詢，或旅遊糾紛的申訴等；由於成立的目的主要在協助來華旅客，所以提供的服務內容還有語言翻譯、緊急及意外事件協助，以及失物招領等。'],
+                [],
+//                淡水信義線
+                ['競爭','不同於部分學者將高聳的玉山和台北101視為「代表國家威權與競爭性格的剛性象徵」，最近紐約時報週日版的旅遊版中，則介紹了台北市，並將「台北101」和它的周邊信義計畫商圈氛圍形容為「快樂消費精神」，成為青春、軟性文化的代表，也帶出「一座101、各自表述」的有趣話題。'],
+                ['一望無際','「蒹葭蒼蒼，白露為霜」，秋風正起，秋意漸濃，一望無際的芒花在陽明山盛開起來，宛如白浪翻騰，漫漫的花海以數大為美之姿，舒展蒼茫的風韻，搖曳中為人們悄悄拉開了秋天的序幕。'],
+                [],[],[],
+//                松山新店線
+                ['好奇','來到台北中正紀念堂，一群男扮女裝的「老婆子」，身著花紅鳳仙裝、洋紅翠綠長裙；左手拿扇、右手拿傘；俗豔的打扮，引來不少好奇觀眾爭相合影留念。'],
+                ['提供','在主辦單位國立歷史博物館、聯合報及主要展品提供的印度加爾各達博物館合力之下，一百六十九件展品，鋪陳出西元前兩千五百年到二十世紀、將近五千年的歷史長河，讓觀眾在文物中，領略印度宗教、文化的多樣性。'],
+                ['欣賞','剛過完端午，儘管便利超商有著各家名粽宅配到府，但或許被媒體上的粽子衛生問題壞了胃口吧，今年硬是一顆粽子也沒吃，倒是趁著週末，到新店碧潭橋頭欣賞了一場為了慶祝端午舉辦的爵士樂演奏，感覺挺好的。'],
+                ['發生','民國64年，八德路四段與饒河街將拓寬，市府計畫將攤販安置於麥帥橋下的南松市場，但部分攤商不願遷移，與警方發生衝突，警方強力執法後，才將攤販全數搬遷。'],
+                ['民眾','其他如天母的軍艦岩、信義區的虎山和象山、中和的圓通寺和景美的仙跡岩都是民眾熱愛的步道。'],
+//                中和新蘆線
+                ['服務','在行天宮為神「效勞」的義工們都知道女性在生理期間，不可以到廟裡服務。在廟會慶典中，人們認為當乩童在穿針、砍背等見血儀式進行中，如果被「不乾淨」的女人看見，那乩童就會流血不止。'],
+                ['原則','做生意仍保有古風迪化街的布商們都是大盤商，他們向廠裡進貨，然後再批發到各地的零售商。和他們有往來的零售商都知道：由於他們秉持中國人做生意講義氣的原則，信譽卓著、價錢公道，因此都擁有固定的交易對象'],
+                ['首先','雖然光華商場已有32年歷史，但在年輕人印象中，首先想到的是它銷售的電子產品；至於舊書攤，則是老一輩民眾的記憶。'],
+                ['保存','曾經參與華山藝文特區保存的藝評家黃海鳴則曾比較兩者：「松菸不需要太多改變，就是一個極適合散步、思考的空間，並且有潛力成為一個層次非常高的綜合藝術村；相較之下，華山特區更為粗放、更像廢墟，空間屬性比較適合作為年輕、另類的藝術實驗基地。」'],
+                ['本身','比較起其他著名的民宅，明顯地蘆洲李宅不像一般士紳富豪喜於雕樑畫棟的裝飾，建築本身沒有任何多餘的設計動作。'],
+//                板南線
+                [],[],[],[],[],
+//                台灣好行
+                ['文件','除了典藏檔案文件的史庫外，陽明書屋也設有圖書資料中心及視聽資料中心。'],
+                [],
+                ['古代','古代VS.現代大量消費人口湧入，改變了九份原有的生活。'],
+                ['擁有','今天的朱銘或是朱家的孩子就和全國兩千多萬的你我一樣，共同擁有這一座天人合一的戶外雕塑美術館。'],
+                []];
+            var var1Content = [[],
+//               文湖線
+                ['規劃','guī huà','6','VC','如何規劃和執行，夫妻應彼此商量，施行起來才會有章法。(6)','至於部分需要給予專業輔導的學生，政府也應詳加規劃。(5)','學校規定，每位學生要開闢一塊菜園，自己規劃，自己耕作，種什麼都可以，收成以後販賣給學校，作為餐廳採買的食品。(2)'],
+                ['上路','shàng lù','6','VA','只有提起勇氣，放下一切，輕身上路，大步向前挺進。(6)','駕駛執照雖然到手，百分之九十九都不敢上路，上路的朋友，全憑膽大包天。(5)','通常我都在白天休息，夜晚時上路 ，這樣才能確保不會碰到人。(2)'],
+                ['參觀','cān guān','3','VC','我也想辦法募集資源送上山，或帶孩子們下山來參加文化活動，如參觀科學館、博物館及故宮的特展。(3)','孩子的自我延伸還包括接近大自然，參觀各種展覽，參與家族或社區的活動，諸如慶典、婚喪喜慶等。孩子在父母的帶領下參與這些活動，有助其自我的延伸，從而幫助他發展人際、信心和互助合作的能力。(5)','教師應該廣泛閱讀，在教學之中表現出廣博的知識；要多方面參觀，舉凡農漁業、高科技業或重要建設，都值得組團參觀，增加視野，厚植教學的深度和廣度，並與現實結合。(5)'],
+                ['長久','cháng jiǔ','5','VH','人與人之間長久關係是否良好，往往就在一剎那之間決定。(5)','但長久寄人籬下不是辦法，她終於要求搬出去。(2)','在這轉換的過程中，新進的信息會與原存的信息結合起來成為一個有組織的結構，這個結構可以在我們的腦海中長久存留，而這個結構一般稱為記憶。(3)'],	
+                ['鬧','nào','5','VC','回來也不常在家，要不就是來一堆朋友，又吵又鬧。(3)','再往長遠看，也許有一天人類連婚姻制度都沒有，地球又鬧人口爆炸，那麼結婚實在算不得是人生最大的事，女性也不一定非嫁人不可了。(4)','度蜜月時兩人開始爭吵，最近鬧著離婚。(4)'],			
+//               淡水信義線
+                ['活力','huó lì','4','Na','可以嘗試講講笑話，並以自己為笑話中的主角，以不針對他人的話語為原則，如此一來，生活在充滿笑聲的人，會是活力充沛的。(5)','由於她對於串項鍊很有熱忱，因此我邀請她下次聚會帶一些成品過來，期望能夠喚起她的活力。(4)','若是一路走來，陷在現實生活的泥沼裡，忘了許多更重要的東西，例如自己真正在意的核心價值為何，人們會逐漸失去對於生命的活力和熱情。(4)'],
+                ['氣候','qì hòu','6','Na','當濫砍伐樹林時，卻沒有考慮到這將會引起哪些後果，諸如水土保持、資源枯竭、氣候變化、景觀破壞等問題。(4)','汙染的擴大，已使得酸雨、油汙染、森林大火，形成一股汙染鏈，引起世界性的氣候異常。(4)','高山氣候變化多端，一天之中體驗陰晴不定的情況，經歷春夏秋冬不同的感覺是司空見慣的事。(2)'],
+                ['博物館','bó wù guǎn','4','Nc','台中的自然科學博物館，是學習自然科學的有趣殿堂。(3)','故宮博物院是中國最大的博物館，它走過的路，某種程度上是中國文物博物館事業的一個縮影。(1)','對展覽品的內容提出回饋，鼓勵博物館的展覽走向更好的易用性和易理解性。(4)'],
+                ['森林','sēn lín','4','Na','森林的功用包括保持水土、涵養水源，防風固沙，調節氣候，保護環境，淨化大氣，吸塵、造氧、殺菌、減少噪音等等功能(5)','台灣的山地本來是一片蓊鬱的森林，經由我們毫無節制的濫墾，水資源破壞了，水土保持出問題了，大環境的安全和生活環境的品質失去了保障，我們將消受不起濫墾的後果。(4)','孩子們在附近遊玩，在小溪裡兜弄魚蝦，往森林小徑踏青。(2)'],
+                ['轉捩點','zhuǎn liè diǎn','7','Na','大學四年是許多人一生的轉捩點，若能理智地規劃這段生涯，其重要不言可喻。(3)','成功不是贏在起跑點，而是「贏在轉捩點」，只要他有繼續學習的動機，一定有成功的希望。(2)','開拓大眾市場的時候，緩慢的初期銷售成績突然加速，這就是新產品的轉捩點。(2)'],
+//                松山新店線
+                ['主體','zhǔ tǐ','5','Na','學校的主要出入口就在主體建築正中央，一進門就是辦公室。(1)','我們必須讓擁有生命主體的孩子對紀律產生認同和內化。(3)','這間酒樓雖然地處腹地寬闊的嘉義郊區，建築主體卻沒有因此蓋得富麗堂皇。(4)'],
+                ['傳統','chuán tǒng','3','chuán tǒng','這種善有善報的價值觀，對我們比較傳統的中國人來說是相當熟悉的。(1)','孩子的舞台在未來，陳舊的傳統知識，對他又有什麼好處？(1)','台灣在社會的巨變下，傳統文化中所強調的孝道觀念正受到衝擊。(3)'],
+                ['感到','gǎn dào','4','VK','在得不到答覆的時候，使她感到很羞辱而情緒不安。(1)','人一聽到「數學」，就會不自主的感到害怕與無助。(2)','在情感低落症中，患者長達兩年以上持續感到輕度的憂鬱，心情就是好不起來。(3)'],
+                ['觀光','guān guāng','4','Na','故宮是我們炎黃子孫最大的驕傲，也是台灣觀光最大的賣點。(1)','第好不容易到了國外，不去著名景觀或是歷史古蹟等觀光景點也太可惜了。(4)','第目前來華的觀光客銳減，多數的觀光旅館均門可羅雀。(4)'],	
+                ['留下','liú xiɑ','3','VC','選擇適合自己的服裝，不一定得是流行名牌，只要能給人清爽明亮或是專業自信的感覺，一定會留下好印象。(2)','他不讓孩子因音樂而受罰，怕孩子心中會留下陰影。(2)','道德和自律會在生活中留下清香，留下自強不息和自豪的喜樂。(3)'],
+//                中和新蘆線
+                ['公認','gōng rèn','6','VE','沖山是去年斯巴達松超馬賽的銀牌得主，也是大家公認的日本第一個超馬開山始祖。(4)','美國這個資本主義國家在二次大戰時，是舉世公認的「反侵略戰爭的兵工廠」。(4)','人們公認赫廉和皇甫為製作木梳的始祖，並供奉他倆的牌位，每年二月十八和九月二十八這兩天，都要祭祀祖師爺。(5)'],
+                ['閉','bi','5','VC','老師懾於惡勢力不敢干預，只好睜一隻眼、閉一隻眼。(3)','她閉著眼睛躺了兩三分鐘。(2)','他「媽呀！」一聲慘叫，閉著眼睛往外躍。(2)'],
+                ['眾多','zhòng duō','5','VH','小傑和眾多孩子一樣，喜歡趁著爸媽忙碌時，猛玩電視遊樂器。(4)','如今，工商社會的資源眾多，又有各種滿足慾望的合理途徑，再加上政治、宗教與社會階層的限制愈來愈少，人應該可以有一些適當的慾望。(4)','現代的中國大陸，科技昌明，人才眾多，花了三十多年，對長江的水患至今仍束手無策。(5)'],
+                ['心靈','xīn líng','6','Na','胡適、沈從文及普羅斯特（M.Proust）也只有在最舒適時才動筆創作，亦即這樣的隱蔽空間可使具創造力的人，獲得思考所需的「寧靜心靈」。(5)','純粹的心靈就是一種形而上的存在。(2)','透過這帖溫柔的特質，讓患者在沒有任何壓力的情況下，放鬆、開放的說出自己的經驗，及心靈的結，給自己肯定，重新建座信心的城堡。(4)'],	
+                ['不堪','bù kān','6','VK','她日夜為這件事焦慮，身心疲累不堪，也就影響到自己的情緒。(4)','如果不加以悉心治療，日後可能在不堪折磨下，導致更嚴重的病情。(4)','求好心切的父母，處處為孩子設想，精神壓力大；自己覺得疲累不堪，孩子也未必受益。我知道許多父母親為教育子女起煩惱，我建議他們釐清正確的態度。(4)'],
+//               板南線
+                ['花園','huā yuán','4','NC','他完全無法坐在教室中，多在教室外或花園中自言自語走來走去，也不聽老師的話。(1)','這朵玫瑰是從我家園摘下來的，我想送給你。(1)','教師是個園丁，負責把一個花園整理、灌溉。(1)'],
+                ['改造','gǎi zào','6','VC','如果不問原因而想改造一個人，效果會受到很大的限制。(1)','讓孩子動手改造一下舊玩具，改造得好，舊的也變成新的。(1)','他為掃除文盲及農村改造而努力。(5)'],
+                ['年輕',' nián qīng','3','VH','這些生活上的「享受」，幾乎都是她年輕時沒享受過的。(1)','最讓妻子們擔心的還是她們丈夫辦公室的一些年輕、能幹的小姐們。(1)','年輕的一代嚮往並且極力爭取小家庭的自由自在生活。(6)'],
+                ['美好',' měi hǎo','5','VH','從這肉體的饑餓，產生了心靈間最美好的關切。(1)','事實上，人間仍然是有美好姻緣的。(5)','大學生在婚前同居是一件美好的事，很正常，很自然。(1)'],
+                ['計畫',' jì huà','4','Na','他們常常計畫以後的生活，那些遠景美得讓她不敢想像。(1)','他在國外為錢賣命，也沒有計畫、沒有志向，人越過越像機械。(4)','這機構從學生入學以後到畢業，以及畢業之後，有計畫地提供事業輔導的服務。 (1)'],
+//               台灣好行
+                ['總理','zǒng lǐ','6','NA','沒想到，一位總理的臥室裝飾竟然價值高達一千萬美元。(6)','因為他是國務總理，而我是升斗小民，所以我們的處境根本無法相提並論。(5)','德國總理的為人如何想必大家都已心知肚明了。(6)'],
+                ['遊客','yóu kè','5','NA','迪士尼樂園每天遊客都很多，如果去晚了，連買門票都買不到呢!(2)','瀑布在空中凍結，遊客的讚嘆聲也在空中凝固，因為沒有語言可以形容它的美麗。(5)','墨爾本與新加坡是第一個將觀光與餐飲結合以吸引遊客的城市。(5)'],
+			     ['命運','mìng yùn','6','NA','您雖然怨恨自己的命運，但命運是我們人能夠扭轉、改變的。(4)','媽媽相信，只要學問好，將來就可以改變自己的命運。(4)','做自己主人的人才能掌握命運與前途，不必仰人鼻息，看人臉色 。(4)'],
+                ['公園','gōng yuán','3','NC','只要父母多給予一些幫助，例如常帶他到公園，或運動場，孩子便有較多的機會交到朋友。(4)','他獨自坐在公園曬太陽，看到一對白髮老夫妻，用輪椅推著一個生病的中年男子，也就是他們的兒子，此景令他感觸很深。(3)','有機會可以多到公園走走，在大樹下的草地跳動、喊叫、深呼吸、唱歌、跳舞都有助於紓解壓力。(3)'],
+                ['瀑布','pù bù','6','NA','靜心之後，她經歷新境界，置身美麗的彩色瀑布中，全身生氣盎然 。(5)','雷鳴般的瀑布彷彿心中澎湃的激情，揮之不去 。(6)','這間大型木造房屋在瀑布的水氣籠罩下，總是泛著一股神祕氣息。(5)'],];
+            var var2Content = [[],
+//               文湖線
+                ['統計','tǒng jì','5','Na','其實，從研究統計上看，憂鬱症的人口數正持續增加，而具有憂鬱特質的不快樂人口，合計有四成之多。(5)','根據資料統計，民國七十七、八兩年台灣地區的機車銷售量均達百萬輛之譜，足見其市場潛力之大，目前又逢交通黑暗期，當然更是其大顯身手的好機會。(5)','無所不經營的西武集團堤義明的西武集團總資產，據非正式的統計可抵日本國家預算的一年總額，也就是超過六十兆日幣。(5)'],
+                ['商機','shāng jī','6','Na','在美國情人節是滿受重視的節日，又有商機，所以各種促銷宣傳早在幾個星期前就已經開始，幾乎不太可能有人不知道「情人節到了」。(2)','由於商機無限，新技術、新產品源源不絕，無論男女，幾乎都勇於以身作試驗，而且年齡層越來越低。(5)','而他結合原住民文化及德國名鞋設計的創作理念，更是融合東方傳統與西方現代的創新作法，頗具有藝術和商機的價值，這也是他善於嘗試、學習、突破的成果。(5)'],
+                ['信徒','xìn tú','5','Na','你看，人為了享受可以如此理直氣壯捍衛自己的喜好，而原本旁觀湊熱鬧的人也會基於好奇加入，然後成為捍衛的信徒。(5)','他到廟裡拜拜，看到信徒為了風大而點不著香所苦，於是靈機一動，回家後便發明了只要拉開封套就會自動點燃的香。(4)','依據思想自由的原則，只要某一種思想的信徒不非法的使用暴力作破壞的行動，那麼，任何一種思想都不應該被排斥，任何一種思想的信徒都可以依據言論自由的原則為了它爭取更多的信徒。(5)'],
+                ['雙方','shuāng fāng','4','Nh','我覺得消除這類困擾的方法是因人而異的，一個原則是「知己知彼」，不勉強、不強求、坦誠的尋求一個最適合雙方當事人的解決方法。(2)','雙方代表就在會場上各說各話，只管表達自己的立場和看法。(3)','我們的目標是讓被介紹的雙方都感到輕鬆自在，同時促進會談的氣氛，如果你預先已曉得他們的偏好，最好打破既定的禮儀規範，來配合他們的偏好。(4)'],	
+                ['步','bù','3','Nf','雖然晚了一步，好在仍有改進的機會──他們原本是好的，了解了原因，用對了方法，自然可以改進。(3)','和這種人相反的，另有一種比較實際的人，他們衡量自己的能力，把目標放在「有把握」的層次上，這種人很少有挫折，而且他們一步一步來，一樣會有成就。(2)','認知的下一步是充分認知他的行為所將導致的後果。(3)'],	
+//              淡水信義線              
+                ['自從','zì cóng','4','P','自從暢銷書排行榜出現之後，我們可以擁有較為客觀的資料作為買書的依據。(4)','自從「慢跑」席捲美國之後，許多個案研究報告說明「慢跑」或「有氧舞蹈」有助於減低憂鬱的現象。(4)','自從人類基因體解碼之後，許多過去口說無憑，純思辨的東西，現在有了實證的資料。(4)'],
+                ['火山','huǒ shān','5','Na','不要把怨恨隱藏在心中，積怨久了，會像火山爆發一樣不可收拾。(5)','硬體的優勢若無軟體配合，就像一座死火山一般，發不出光和熱。(3)','板塊間會互相推擠，保持微妙平衡，如果這個平衡部份崩解，就會發生地震或火山爆發等地殼變動。(4)'],
+                ['之前','Jhih Chián','4','Ng','一旦決定可做或不可做某些事情後，要嚴格遵守。因此說「不可」之前，最好先三思再做決定。(3)','由於觸覺刺激具有首要和長久的效果，以及對別種感覺樣式的效應，因此可在一般活動或教育措施之前，事先施給孩童這類觸覺刺激。(4)','在放手讓幼兒自由探索之前，應該先讓幼兒熟悉玩具本身的特性並遵守，以養成對物體尊重的態度。(4)'],
+                ['投射','tóu shè','6','VC','家長經常把自己的想法、情緒「投射」在孩子身上，投射的內容可以有很多，包括自己無法接受的、做不到的部分。(1)','房間是淡雅的米色歐風裝潢，大片窗戶可觀賞愛河夜景，七彩燈光投射在水面上，波光瀲灩甚是美麗。(6)','光束從屋頂上的破瓦投射進屋內，微細的塵埃無聲地旋舞，旋舞。(3)'],
+                ['形成','xíng chéng','6','VG','商標往往意謂著你必須扮演某種角色，間接地便形成了你的特殊人格特質及行為模式。(5)','廣告所提供的都是評估性的認知單位，藉以使消費者形成對商品的好的總感覺。(2)','歧見的發生是由於各執己見，不願意了解對方，而無法形成共識。(4)'],
+//               松山新店線
+                ['規模','guī mó','4','Na','人類對婦女空前絕後最大規模的暴虐文化，發生在中國。(2)','他的企業已經擴展到相當的規模，相關事業也逐漸增加。(4)','他說，一切科學上的設施，考古學家的大規模的探險與發掘，政府總是竭力贊助的。(4)'],
+                ['參觀','cān guān','3','VC','哪兒風景好就上哪兒，何處值得參觀就去一飽眼福。(1)','原來老人家認為最重要的生產線參觀過了，目的已經達成，所以可以回去了。(3)','隨著我一起工作，家人遊玩了許多風景區，參觀了不少大企業，也拜訪認識許多朋友或長輩。(3)'],
+                ['痕跡','hén jī','5','Na','說過什麼樣的謊，時間一久，記憶痕跡淡退，馬腳就露出來了。(1)','在濃濁的空氣中，來路不明的房客所遺留的痕跡清晰可見。(2)','聽說捕捉到的野雞，很多羽毛有折斷痕跡，好像被捕獲過，莫非有人故意如此？(4)'],
+                ['伴隨','bàn suí','5','VC','偷竊的孩子，心理上都伴隨著不為人知的焦慮。(1)','患者會嘗試以死解脫時，通常伴隨有憂鬱症狀。(4)','炎夏伴隨著徐徐涼風，令自己心胸感受到舒暢愉悅。(6)'],	
+                ['由於','yóu yú','4','Cbb','由於努力，她的讀書過程一直很順利，從好的高中畢業，就考上好的大學。(1)','實際婚姻生活裡有太多太多都是雞毛蒜皮的小事，由於處理不好而掀起軒然大波的。(2)','由於閱讀困難使他在校成績不理想，並在日後政治演講中的需一再背誦演說稿而深感為難。(4)'],	
+//                中和新蘆線
+                ['陽光','yáng guāng','4','Na','有陽光的地方就會有繁榮和豐收。(4)','沒有條件的愛就像陽光一樣，是人類最珍貴的本性。(3)','星期天應該儘量帶孩子到野外郊遊。因為野外除了有陽光、有新鮮的空氣外，廣大的視野、寬敞的活動空間，可以讓孩子盡情地奔跑、歡笑。(3)'],
+                ['採購','cǎi gòu','5','VC','集中採購最大的優勢是採購的量夠大，因為量夠大，讓賣方可以達到規模生產，因而降低製造成本，買家才能得到相對的低價。(4)','「小饅頭」的原料如果向日本採購，價格實在太貴了，品質也不如荷蘭穩定。也因此，旺旺一直採用荷蘭產品，主要是因為高緯度國家生產的馬鈴薯澱粉顆粒密度很穩定，烤起來比較香脆。(5)','到目前為止，她還沒時間採購釣具、外出釣魚。(4)'],
+                ['店家','diàn jiā','6','Na','大稻埕那一帶店家的米苔目特別好吃，她就事先研究好路線，帶孩子們到那邊去「散步、吃米苔目」，走一走陌生的地方。(2)','民國四十幾年的延平北路，一直是店家林立的商店街。(6)','公園旁一家有機食品店氣質脫俗，我們心存好奇，有天終於繞進店家。(4)'],
+                ['好似','hǎo sì','6','VG','我反而覺得現在的我好似陳年老酒般愈陳愈香，也愈來愈有人味！(3)','她倒是十分合作地說個不停，就好似等了好久才有這傾訴的機會。(2)','阿公阿嬤忍不住站起來，隨著哼唱，手舞足蹈，好似回到當年唱頭目婚禮的時候。(4)'],	
+                ['參與','cān yù','5','VC','別忘了聽聽孩子的意見，讓他有機會參與整個計畫的構思與定案。(3)','由於兒童電視節目的特殊性，必須有專家學者的參與製作才能避免誤導的現象產生。(4)','許多學生參與了這些活動之後，建立了這些活動的效度。(5)'],
+//               板南線
+                ['城市','chéng shì','3','Na','不只費城的城中心如此，全美許多生氣勃勃的城市都如此。(5)','這對老夫婦的子女都已離家到城市上班。(1)','靠近巴圖瓦的檳城，是馬來西亞第二大城市。(1)'],
+                ['不久',' bù jiǔ','4','Nd','沒想到，過了不久﹐大水竟猛然上漲﹐淹沒了整個大地。 (1)','他說從小沒辦法專心讀書，坐下不久就感到不安，需東張西望或起來走一走。(4)','一年前進入幼稚園不久，他開始有上述自我傷害的行為。(1)'],
+                ['典禮 ','diǎn lǐ','5','VH','六月正值各校舉行畢業典禮之際，許多學生對老師依依不捨。(4)','他的第一次大挫敗是在大學的畢業典禮上，他並未如願拿到最高榮譽。(1)','許多社交活動如舞會、婚禮或典禮，都有缺失，但仍然不失莊嚴。(5)'],
+                ['文化 ','wén huà','4','Na','他們不論在物質上、社會文化上，均能領會到成功的價值。(2)','由於社會文化背景的影響，傳統的中國人往往諱言『性』。(5)','東西方的文化背景畢竟不是同一回事。(1)'],
+                ['興起',' xīng qǐ','6','VC','社會文化變遷，女權運動興起以後，各種約束的力量都瓦解了。(1)','他們刺激了各種昂貴商品和高價服務業的興起──從服務裝設計到歐洲旅遊等。(4)','佛教進入中國以後，不斷發展，到了禪宗興起，在制慾這方面便提高到最高境界。(1)'],
+//               台灣好行
+                ['國家','guó jiā','3','NA','中國向來是個崇尚權威的國家，在傳統的子女養育裡，都要求子女絕對服從父母的指令來生活。(4)','在民主的國家，你我都可以自由節制地表達意見，這就是言論自由的展現。(4)','兒童是國家未來的主人翁，所以我們更應為兒童的教育而努力。(7)'],
+                ['花紋','huā wén','7','NA','他是個胖胖的中年人，穿著有點粗野的方格花紋西服 。 (7)','他身材高挑，棕色大衣底下穿了一件花紋典雅的背心，頭戴高禮帽，渾身散發時尚的氣息。(5)','她們所用服飾，繡著龍鳳花紋，點綴著珍珠寶石，極盡奢華之能事。(7)'],
+                ['色彩','sè cǎi','6','NA','阿明喜歡的是，藍色、綠色、黃色等亮麗的色彩。(3)','我在商店中看到一件大紅毛線衣，那鮮艷的色彩非常具有誘惑力。(5)','廣告中，色彩是不可缺少的一部份，不用色彩或用錯色彩均將使整個廣告的效果受損。(5)'],
+                ['參觀','cān guān','3','VC',' 男朋友隨著我一起工作，順便遊玩了許多風景區，參觀了不少大企業，也拜訪認識許多朋友或長輩。(4)','陳老師是一位熱心又善良的老師，最喜歡帶著學生郊遊或參觀旅行，甚至安排一些戶外活動或田野調查研究 。(4)','舉凡農漁業、高科技業或重要建設，都值得組團參觀，增加視野，厚植教學的深度和廣度(6)'],
+                ['沿途','yán tú','7','NC','我們先搭上開往近郊湖畔的火車，沿途吃吃喝喝，有說有笑。 (6)','晚上，我望向朦朧的窗外，注視著沿途高山，我深深地呼吸，感到輕鬆自在 。(5)','旅客可以一邊聊天，一邊欣賞沿途的風光，同時享受佳餚，是十分悠閒浪漫且歡樂的時光。(6)']];
+            var var3Content = [[],
+//               文湖線
+                ['動物園','dòng wù yuán','4','詞性','因此，每當動物園裡引進了新的明星動物，不管是無尾熊還是熊貓，人們總是大排長龍想要看牠們一眼。(5)','迪士尼樂園不同於一般的公園或動物園，它在某個意義上禁止發自個人的即興遊戲或脫序。(4)','世界各地的動物園在餵紅鶴時，通常都是用配好的紅鶴專用飼料，再加上一些補充性的維生素。(3)'],
+                [],
+                ['百姓','bǎi xìng','6','Na','不但節省了大量的公帑，而且製作簡易，使用方便，保障執法時人員的安全及有效防止傷害無辜百姓。(6)','本來日本稱農民為百姓，按百姓兩字，原本指一般公民，因為古代初始的公民就是農民，不需分別，故二者混用一名，後來農民逐漸與其他諸階級分化，百姓遂專指農民。(5)','自己一人的身家性命，還是沒有百姓許多性命重要！(2)'],
+                ['項目','xiàng mù','5','Na','請不要用名片背面來列印行銷資訊或服務項目。(5)','由於食品項目的認定與過去做外銷罐頭時不同，所以一開始的會計和存貨、銷貨等方面，必須花一段時間重新建立內需市場的表單。(4)','針對問題研擬的解決方案都變成大系統中的小系統、小項目。(4)'],	
+                [],	
+//               淡水信義線              
+                ['競爭','jìng zhēng','4','Na','妥協是雙方的抱負水準降低了、期望也退讓了，在競爭的情況中仍然需要相互的合作才能找到解決的方案。(4)','教師所面臨的一個難題是「升學壓力」，對於在競爭下脫穎而出的學生，他們的自我期許較高、團體壓力較大、競爭心也強，老師的教材、教法就得為此調適(2)','二十世紀的社會是個充滿競爭的社會，在這個社會裡，每一個人都有機會表現自己，展露自己的才華；相對的，也有更多的機會暴露自己的缺點。(1)'],
+                 ['一望無際','yí wàng wú jì','7','VH','飛機的下方是灰暗色的厚厚卷雲，一望無際，像無邊無盡的平原。(4)','列車衝出茂密的闊葉林，行駛在一望無際的原野上。(6)','火車接近的港時，到了海岸邊，一望無際的海洋，點點船隻漂遊其上，從車窗望出去滿心清爽。(5)'],
+                [],[],[],
+//               松山新店線
+                ['好奇','hào qí','4','詞VH','我對催眠相當好奇，有機會也很想「拜師學藝」。(1)','小朋友面對任何不知道的事物，都會感到好奇，並且想一窺堂奧。(2)','有一次，主人忘了關籠門，金絲雀好奇地一飛而出，才發現世界很大。(2)'],
+                ['提供','tí gōng','4','VD','本書中所討論到的美國一般情形，正能提供我們一個借鏡。(1)','在這一篇的文章裡，吳博士提供你各種增進積極溝通的方法。(2)','在這一篇的文章裡，吳博士提供你各種增進積極溝通的方法。(3)'],
+                ['欣賞','xīn shǎng','4','VJ','她喜歡跟男孩子玩，欣賞他們滿身泥土和汗臭味，也欣賞他們的粗野豪放。(1)','如果你夠了解自己，你就有可能真正欣賞自己，進而尋求方法，塑造更理想的自己。(1)','夫妻是在彼此鼓勵中成長，互相欣賞中覺得自己重要和幸福。(2)'],
+                ['發生','fā shēng','3','VJ','如果這個老師和他的父母非常不一樣，他很可能會抗拒依賴這個老師，發生適應上的困難。(1)','要是我們真的結婚，我恐怕會日夜擔心發生意外。(3)','他們縱然發生衝突也懂得怎樣去處理，不致於弄得不可收拾。(4)'],	
+                ['民眾','mín zhòng','4','Na','以他獨特的文筆和民眾語言談論民眾關心的或還沒關心，但應該關心的話題。(3)','民眾對這位樂善好施、富可敵國的企業家，竟然捲入連續殺人案，而且可能是教唆主謀，都感到半信半疑。(4)','天才的隕落，轟動了海內外，媒體連續報導多日，民眾氣憤填膺，激起了廣大同情。(5)'],
+//               中和新蘆線
+                ['服務','fu wu','3','Vc','為大眾服務，活得比較有意義。(3)','一個年輕女孩離鄉背井到加州的餐廳服務，認識了在那家餐廳當廚師的先生。(2)','做生意不但要公道，還要講究服務。(3)'],
+                ['原則 yuan ze','4','Na','基本人際關係的原則是存在的，但在剛接觸一個團體時，我們不可因先入為主的觀念而破壞了相互間的交往。(4)','處理自殺表白的五項原則下面我們將提出五點原則，來幫助你減少犯錯的機會，請你銘記在心，訓練成為反射動作，否則等你真的遇上自殺告白時，心一慌可能半個字都想不起來。(3)','傳統的中國人不太重視原則，而十分重視情義。(4)'],
+                ['首先','shǒu xiān','4','D','父母這時首先應正確認識孩童問題的本質、配合醫療輔導、運用時空和觸覺環境，以各種遊玩方式刺激孩童的前庭、筋肉和視覺，使腦部的感覺統合功能發展得更健全。(4)','經營農場。這是他最先發展的興趣，在農場中長大，他首先對動物感到無比的興趣。(3)','父母管教子女時，首先必須充分了解：管教孩子的目的何在？(3)'],
+                ['保存','bǎo cún','5','VC','在工作表現上，業績較佳的職員，保存了較多的童心。(4)','我會把買家電的木箱子拆卸保存起來，興致來了，就做點什麼，或作為修填家具門窗之用。(4)','調出香濃的風味牛奶不難，難在穩定的品質和製造保存。(3)'],	
+                ['本身','běn shēn','5','Nh','在大醫療機構或社會救濟場所中，通常都有社工人員做這類服務工作，同時協助家長處理輔導孩童或父母本身的問題。(4)','他們目中「標準」的女婿或媳婦（尤其是女婿），應該是出身富裕的家庭，或本身有經濟基礎的。(3)','一個喜劇中不可缺少的角色。細瘦的身材，蒼白的面孔，憂鬱中帶喜感性格，本身就是一個賣傻買笑的甘草人物。(4)'],
+//               板南線
+                [],[],[],[],[],
+//               台灣好行
+                ['文件','wén jiàn','5','NA','放學後，小明把整理好的文件資料拿給我看，讓我十分驚喜，因為整理得非常詳盡。(5)','後來我們才知道，當年的文件全部都是偽造的，讓我們既生氣又無處發洩。(5)','有一天，我正在辦公室看著我的文件，突然一陣風吹過，把我整理好的資料都吹散了。(3)'],
+                [],
+                ['古代','gǔ dài','5','ND','憑媒妁之言、父母之命而結婚，在古代幾乎是公式，在今天已經成為例外了。 (5)','人類從來沒有停止自相殘害過，從古代到現代，人性並沒有任何改變。(5)','中國社會之中，女性受盡歧視，但是在以中國古代社會為背景的武俠小說中，很少有女性被歧視的場景。(5)'],
+                ['擁有','yǒng yǒu','5','VJ','無論中外的研究，都顯示擁有健康的身體是中老年人最關心、最在乎的價值。(4)','她的女兒小芳，成天喊著希望擁有一組芭比娃娃 。(5)','幸福不是穿名牌衣服，擁有名車，住華宅，而是懂得生活。(4)'],
+                []];
+            var passage1_level=['',
+                                '6','6','3','5','5',
+                               '4','5','4','4','4',
+                               '5','3','4','4','5',
+                               '5','3','5','6','6',
+                               '4','4','5','4','6',
+                               '6','5','6','5','6',];
+            var passage2_level=['',
+                                '5','5','5','3','3',
+                               '4','5','4','4','5',
+                               '2','6','4','6','5',
+                               '4','4','6','6','5',
+                                '2','4','5','4','5',
+                                '6','5','5','7','7',];
+            var passage3_level=['',
+                                '4','','6','5','',
+                               '4','6','','','',
+                               '6','4','4','5','5',
+                               '3','4','4','5','5',
+                                '','','','','',
+                                '5','','5','4',''];
+            var passage1_web=['',
+//                            文湖線
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=fad3e1a2-6456-421c-922b-bbcee672a154&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d9fbe684-ea1d-4af9-a5c3-6bb855a2dce8&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=69352229-9c44-4b7a-94db-364677ef69eb&CatId=2',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d81f84f4-f7b5-4bcd-b89a-61aede3e0087&CatId=3',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d7a2177b-0c3a-4b52-9e3b-f62ce44c5321&CatId=1',
+//                            淡水信義線
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=f32005c7-3930-40ee-aa28-e537a2a0dd6c&CatId=3',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=a3f8be72-e11a-4b8e-9438-e500c5a9040e&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d54f734d-c768-4649-85e5-33a0168924da&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=64d3df6d-e3a2-4f82-8207-ecfc2b8f06b5&CatId=1',
+                              'https://www.taiwanpanorama.com.tw/Articles/Details?Guid=845619e0-db6e-4d29-bc69-5868f8e0265d&CatId=1',
+//                            松山新店線
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d15e2dcd-e07d-452d-9bcc-0caefabb139f&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=85abed11-7e1e-4599-9e9e-6f0b039e2832&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=96f243b2-cea4-4bef-9296-287e6751cabd&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=cdd1e8ac-1d85-436c-bf80-183080ea4526&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=e03956de-96ab-4a07-bcff-83855eaf8ba9&CatId=1',
+//                            中和新蘆線
+                              'https://www.taiwanpanorama.com.tw/Articles/Details?Guid=f1f0a7f5-c5f4-4356-aa65-ab8a608ad2e7&CatId=1',
+                              'https://www.taiwanpanorama.com/Articles/Details?Guid=ee2622ef-4aaa-4aba-b64b-884334aa141f&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=57ea5001-f3d8-4912-b523-339231dca033&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=1bf55122-b558-411e-9afb-782e07d170d6&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=4dce15de-4c17-4b31-8cdc-2895845d1384&CatId=1',
+//                            板南線
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=ca21afd2-21e3-4890-bb52-bed0b26dd969&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=75e59147-cbbe-4654-8f52-d8a6a8714480&CatId=3',
+                              'https://www.taiwanpanorama.com/Articles/Details?Guid=97f85ff2-704a-4d87-a1aa-4ea4f1c288e6&CatId=1',
+                              'https://www.taiwanpanorama.com.tw/Articles/Details?Guid=d070f141-299a-4e62-981c-a5904fb12d21&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=ad932d4c-5603-4027-826d-7b0586658a2b&CatId=3',
+//                            台灣好行
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=fee30fe4-03f9-4b6c-98b5-d0cc609905c8&CatId=1',
+                              'https://www.taiwanpanorama.com.tw/Articles/Details?Guid=1c720909-d904-47ee-9a20-b745549d6d00&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=19228a96-542d-4f6a-9814-6e12018da2a1&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d2201188-2091-4a87-a563-f8640234acf8&CatId=2',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=98f9b9c7-1d05-4f2f-a58e-87a3af100edd&CatId=1'];
+            var passage2_web=['',
+//                            文湖線
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=d9fbe684-ea1d-4af9-a5c3-6bb855a2dce8&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d9fbe684-ea1d-4af9-a5c3-6bb855a2dce8&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=e03956de-96ab-4a07-bcff-83855eaf8ba9&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d81f84f4-f7b5-4bcd-b89a-61aede3e0087&CatId=3',
+                              '',
+//                            淡水信義線
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=1c1bacc4-7f33-4680-a9fa-9a5608d3e807&CatId=1',
+                            'https://www.taiwanpanorama.com/Articles/Details?Guid=d41bba9f-b84e-4c06-b82e-e9b7fdb629df&CatId=1',
+                            'https://www.taiwan-panorama.com/Articles/Details?Guid=d54f734d-c768-4649-85e5-33a0168924da&CatId=1',
+                            'https://www.taiwan-panorama.com/Articles/Details?Guid=64d3df6d-e3a2-4f82-8207-ecfc2b8f06b5&CatId=1',
+                            'https://www.taiwanpanorama.com.tw/Articles/Details?Guid=845619e0-db6e-4d29-bc69-5868f8e0265d&CatId=1',
+//                            松山新店線
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=9eee6acb-1ab5-4388-b5c1-087a6fd16c69&CatId=2',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=cfc4bb05-fbe4-4c77-9348-b7244c45f68d&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=5720c99d-e78a-49a6-b77b-bca6b1b894c5&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=cdd1e8ac-1d85-436c-bf80-183080ea4526&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=e56be462-ac92-452a-9288-2b4c9812bd49&CatId=1',
+//	                           中和新蘆線
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=149154b9-4ec9-4faa-8190-ccd487266cf0&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=b13ac98c-16c6-4dc7-9f93-0b97084c6200&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=57ea5001-f3d8-4912-b523-339231dca033&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=07d0cb8b-f631-42f8-8412-4e4d764790ab&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=4dce15de-4c17-4b31-8cdc-2895845d1384&CatId=1',
+//                            板南線
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=a6cc2257-b5e3-4c35-a451-3f6ad79860c1&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=75e59147-cbbe-4654-8f52-d8a6a8714480&CatId=3',
+                              'https://www.taiwanpanorama.com/Articles/Details?Guid=97f85ff2-704a-4d87-a1aa-4ea4f1c288e6&CatId=1',
+                              'https://www.taiwanpanorama.com.tw/Articles/Details?Guid=d070f141-299a-4e62-981c-a5904fb12d21&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=b2c3240b-3f95-4d66-a5ef-c4ae67ea3803&CatId=2',
+//                            台灣好行
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=f89ae258-47fd-4bf1-8690-c505b137444a&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=83a7f8bb-cbd5-44bf-a22e-2d7aaa4ea9ac&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=19228a96-542d-4f6a-9814-6e12018da2a1&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d2201188-2091-4a87-a563-f8640234acf8&CatId=2',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=98f9b9c7-1d05-4f2f-a58e-87a3af100edd&CatId=1'];
+	
+            var passage3_web=['',
+//                            文湖線
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=d9fbe684-ea1d-4af9-a5c3-6bb855a2dce8&CatId=1',
+                              '',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=39924da0-7750-49d7-bfe0-01e397ae4a33&CatId=1',
+                              '',
+                              '',
+//                            淡水信義線
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=f32005c7-3930-40ee-aa28-e537a2a0dd6c&CatId=3',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=3344b056-3e4a-4c8b-8e71-8e87f429e84f&CatId=1',
+                              '','','',
+//                            松山新店線
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=f8a4bd88-5bec-4be0-b1a6-875d627f6387&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=4696182b-a19c-4122-ac24-c91068d3febf&CatId=2',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=62459fd1-5f1c-478c-a047-7dca202638e2&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=cdd1e8ac-1d85-436c-bf80-183080ea4526&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=e56be462-ac92-452a-9288-2b4c9812bd49&CatId=1',
+//                            中和新蘆線
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=149154b9-4ec9-4faa-8190-ccd487266cf0&CatId=1',
+                              'https://www.taiwanpanorama.com/Articles/Details?Guid=0c5edd96-f9f8-4b71-9c0b-438d4994b37e&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=12f42db3-3eaa-4119-91b2-1f1a8c2cb23a&CatId=1',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=52439526-42dc-4f3e-ad14-577a779a7a5f&CatId=3',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=4dce15de-4c17-4b31-8cdc-2895845d1384&CatId=1://www.taiwan-panorama.com/Articles/Details?Guid=c7096871-942a-4f40-9cd9-01cbbc19d864&CatId=1',
+//                            板南線
+                             '','','','','',
+//                            台灣好行
+                             'https://www.taiwan-panorama.com/Articles/Details?Guid=fee30fe4-03f9-4b6c-98b5-d0cc609905c8&CatId=1',
+                              '',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d13163b6-1bcf-4b38-bbe5-07a0cd171ecb&CatId=4',
+                              'https://www.taiwan-panorama.com/Articles/Details?Guid=d2201188-2091-4a87-a563-f8640234acf8&CatId=2',
+                              ''];
+
+        </script>
+        </div>
+<div class="mm-wrapper__blocker mm-slideout"><a href="#page"><span class="mm-sronly">Close menu</span></a></div>
+<div id="465f88e5-9860-47b8-a543-55322eee84c7-quickmenu"></div>
+</body></html>
