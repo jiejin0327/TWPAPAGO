@@ -32,6 +32,26 @@ CREATE TABLE IF NOT EXISTS passages (
     FOREIGN KEY (viewPointId) REFERENCES viewPoints(id)
 );
 
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT,
+    username VARCHAR(50),
+    email VARCHAR(50),
+    password VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+
+CREATE TABLE IF NOT EXISTS reading_activity (
+    id INT AUTO_INCREMENT,
+    user_id INT,
+    passage_id INT,
+    read_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    completion FLOAT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (passage_id) REFERENCES passages(id)
+);
 
 describe viewPoints;
 select * from viewPoints;
