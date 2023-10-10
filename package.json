@@ -1,18 +1,5 @@
 {
-  "name": "taiwanpapago",
-  "version": "1.0.0",
-  "main": "database.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "index.html"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "mysql": "^2.18.1"
+    "dotenv": "^16.3.1"
   }
 }

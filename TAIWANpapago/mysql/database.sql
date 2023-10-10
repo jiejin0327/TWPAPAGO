@@ -33,11 +33,27 @@ CREATE TABLE IF NOT EXISTS passages (
     FOREIGN KEY (viewPointId) REFERENCES viewPoints(id)
 );
 
+LOAD DATA LOCAL INFILE '/tmp/viewPoints.json'
+INTO TABLE viewPoints
+CHARACTER SET utf8mb4
+COLUMNS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+(id, name, imageUrl, photoUrl, map, web);
+
+LOAD DATA LOCAL INFILE '/tmp/passages.json'
+INTO TABLE passages
+CHARACTER SET utf8mb4
+COLUMNS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+(id, viewPointId, eng, level, web, content);
+
+
 
 describe viewPoints;
 select * from viewPoints;
 select * from passages;
-select * from variables;
+
+
 
 -- UPDATE viewPoints 
 -- JOIN (SELECT id FROM viewPoints WHERE name='九份 Jiufen') AS tmp

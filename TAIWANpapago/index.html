@@ -13,6 +13,25 @@
 });
     </script>
 -->
+
+<script>
+    // 設置變數
+    var pageName = "new_twpapago.html";
+
+    // 當頁面加載完成時執行此函數
+    window.onload = function() {
+        // 選擇所有的 <area> 標籤
+        var areas = document.querySelectorAll('area');
+
+        // 遍歷每個 <area> 標籤並修改 href 屬性
+        areas.forEach(function(area) {
+            var href = area.getAttribute('href');
+            if (href.includes('TWPAPAGO.html')) {
+                area.setAttribute('href', href.replace('TWPAPAGO.html', pageName));
+            }
+        });
+    };
+</script>
 </head>
 
 <body>
@@ -21,9 +40,9 @@
 
 <map name="image-map">
     <area target="" alt="臺北市立動物園" title="臺北市立動物園" href="new_twpapago.html?view=1" coords="424,405,492,473" shape="rect" color="red">
-    <area target="" alt="貓空纜車" title="貓空纜車" href="TWPAPAGO.html?view=2" coords="375,531,564,572" shape="rect">
-    <area target="" alt="指南宮" title="指南宮" href="TWPAPAGO.html?view=3" coords="374,483,505,516" shape="rect">
-    <area target="" alt="松山機場" title="松山機場" href="TWPAPAGO.html?view=4" coords="343,140,426,213" shape="rect">
+    <area target="" alt="貓空纜車" title="貓空纜車" href="new_twpapago.html?view=2" coords="375,531,564,572" shape="rect">
+    <area target="" alt="指南宮" title="指南宮" href="new_twpapago.html?view=3" coords="374,483,505,516" shape="rect">
+    <area target="" alt="松山機場" title="松山機場" href="new_twpapago.html?view=4" coords="343,140,426,213" shape="rect">
     <area target="" alt="大湖公園" title="大湖公園" href="TWPAPAGO.html?view=5" coords="443,109,540,188" shape="rect">
     <area target="" alt="臺北101" title="臺北101" href="TWPAPAGO.html?view=6" coords="504,322,550,476" shape="rect">
     <area target="" alt="臺北101" title="臺北101" href="TWPAPAGO.html?view=6" coords="389,323,479,390" shape="rect">

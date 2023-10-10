@@ -184,6 +184,7 @@
 
 <script>     
     const VIEW_THRESHOLD = 5;
+    const hostName = window.location.hostname;
 
     $.urlParam = function (name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)')
@@ -279,7 +280,7 @@
 
         // Fetch view point data
         
-        $.getJSON(`http://localhost:3000/api/viewPoints/${view}`, function(data) {
+        $.getJSON(`http://${hostName}:3000/api/viewPoints/${view}`, function(data) {
         // Update view point information
         const viewPointData = data[0];
         $('#viewPoint').text(viewPointData.name);
@@ -290,7 +291,8 @@
         });
 
         function loadData(view){
-        $.getJSON(`http://localhost:3000/api/passages/${view}`, function (data) {
+        
+        $.getJSON(`http://${hostName}:3000/api/passages/${view}`, function (data) {
             data.forEach((passageData, idx) => {
                 // Parse contents and words from JSON string to object
                 const contents = JSON.parse(passageData.contents);
@@ -316,7 +318,7 @@
     });    
 }
 function setMenu(view) {
-        $.getJSON(`http://localhost:3000/api/viewPoints/`, function(data) {
+        $.getJSON(`http://${hostName}:3000/api/viewPoints/`, function(data) {
             let mrtHtml = '';
             let busHtml = '';
             let lineItem;
@@ -358,7 +360,7 @@ function setMenu(view) {
 
 }
 loadData(view);
-setMenu(view);
+// setMenu(view);
 
         $('body').click(()=>{
            $('.var').hide(); 

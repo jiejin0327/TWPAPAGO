@@ -27,10 +27,11 @@ for (let i = 0; i < viewPointsData.length; i++) {
 }
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '880327',
-  database: 'taiwanpapago'
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  charset: 'utf8mb4'
 });
 
 connection.connect();
